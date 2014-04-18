@@ -1,0 +1,5 @@
+# ignore the bin file
+bin
+
+# ignore any mac cruft
+.DS_STORE
