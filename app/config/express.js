@@ -71,9 +71,8 @@ module.exports = function (app, passport, db) {
     // should be declared after session and flash
     app.use(helpers(config.app.name));
     
+    app.use('/', require('../../app/config/routes')(app, passport)); 
     
-    app.use('/', require('../../app/config/routes'));
-
     // adds CSRF support
     if (process.env.NODE_ENV !== 'test') {
       app.use(require('csurf')());
@@ -96,5 +95,4 @@ module.exports = function (app, passport, db) {
         error: 'Not found'
       });
     });
- // })
 }
