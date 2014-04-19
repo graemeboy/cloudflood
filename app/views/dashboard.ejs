@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+
+<html>
+<head>
+    <title>Cloud:flood Members Area</title>
+
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<style type="text/css">
+  #member-nav
+  {
+    background-color: #ffffff;
+  }
+  td.campaigns-head-actions
+  {
+    width: 100px;
+  }
+  .campaign-action
+  {
+   
+  }
+  .campaign-submit-wrapper 
+  {
+    text-align: center;
+  }
+  footer
+  {
+    padding: 10px;
+  }
+</style>
+
+</head>
+
+<body>
+
+<nav id="member-nav" class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-cloud"></span> </a>
+    </div>
+
+    <div class="collapse navbar-collapse" style="margin-left: 25px;">
+      <ul class="nav navbar-nav navbar-left"> 
+        <li class="active">
+          <a href="#">Create a new campaign</a>
+        </li>  
+      </ul>
+      <ul class="nav navbar-nav navbar-right">   
+				
+				<li class="right-menu-item nav-sign-out">
+				  <a href="#" id="sign-in"><span class="glyphicon glyphicon-cog"></span> Account Settings</a>
+				</li>
+				<li class="right-menu-item nav-sign-out">
+				  <a href="#" id="sign-in"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a>
+				</li>
+				
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div id="campaign-list" style="display:none">
+    <h3>Your Campaigns</h3>
+    <table class="table">
+      <thead>
+        <th class="campaigns-head-name">Name</th>
+        <th class="campaigns-head-conversions">Conversions</th>
+        <th class="campaigns-head-actions">Actions</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Example</td>
+          <td>206</td>
+          <td>
+              <div class="col-xs-2">
+                <a href="#" class="campaign-action"><span class="glyphicon glyphicon-edit"></span></a>
+              </div>
+              <div class="col-xs-2">
+                <a href="#" class="campaign-action"><span class="glyphicon glyphicon-stats"></span></a>
+              </div>
+              <div class="col-xs-2">
+                 <a href="#" class="campaign-action"><span class="glyphicon glyphicon-trash"></span></a>
+              </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div>You have not created any campaigns yet.</div>
+  </div>
+  
+  <div id="campaign-create">
+    <h3>Create a Campaign</h3>
+    
+    <div class="col-md-5">
+      <form role="form">
+        <div class="form-group">
+          <label for="campaign-name">Campaign Name</label>
+          <input type="text" class="form-control" id="campaign-name" placeholder="My campaign">
+        </div>
+        <h4>Your Message</h4>
+        <div class="form-group">
+          <label for="">Tweet or Status to be Shared</label>
+          <p>Write a message here that you want to your audience to share</p>
+          <textarea type="text" name="campaign-message" class="form-control" id="campaign-message" placeholder="Your tweet / status"></textarea>
+          
+          <div class="checkbox">
+           <label>
+              <input name="campaign-message-edit" type="checkbox"> Allow the user to edit this message
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="campaign-link">Link to share (Optional)</label>
+          <p>Add a link included in this message, if you want</p>
+          <input type="text" class="form-control" name="campaign-message" id="campaign-link" placeholder="http://">
+        </div>
+        <!--
+<div class="form-group">
+          <label for="exampleInputFile">File input</label>
+          <input type="file" id="exampleInputFile">
+          <p class="help-block">Example block-level help text here.</p>
+        </div>
+-->
+        <h4>Your Product Link</h4>
+        <div class="form-group">
+          <p>Where does the user go after sharing your message?</p>
+          <input type="text" class="form-control" name="campaign-product" id="campaign-product" placeholder="http://">
+        </div>
+          
+        <h4>Social Networks</h4>
+        <div class="checkbox">
+          <label>
+            <input name="campaign-twitter" type="checkbox"> Allow Posting on Twitter
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input name="campaign-facebook" type="checkbox"> Allow Posting on Facebook
+          </label>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-7">
+      
+    </div>
+    
+    <div class="clearfix"></div>
+    <div class="campaign-submit-wrapper">
+      <input type="submit" class="btn btn-success" value="Create Campaign" />
+    </div>
+  </div>
+  
+  </div>
+</div>
+
+<footer>
+  <div class="container container-fluid">
+    <p>This is the footer</p>
+  </div>
+</footer>
+</body>
+</html>
