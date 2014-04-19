@@ -11,23 +11,6 @@ var login = function (req, res) {
 exports.signin = function (req, res) {}
 
 /**
- * Auth callback
- */
-
-exports.authCallback = login
-
-/**
- * Show login form
- */
-
-exports.login = function (req, res) {
-  res.render('/', {
-    title: 'Login',
-    message: req.flash('error')
-  })
-}
-
-/**
  * Show sign up form
  */
 
