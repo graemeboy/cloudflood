@@ -4,8 +4,8 @@ var async = require('async')
  * Controllers
  */
 
-var user = require('../app/controllers/user')
-  , index = require('../app/controllers/index');
+var user = require('../../app/controllers/user')
+  , index = require('../../app/controllers/index');
   //, auth = require('./middlewares/authorization')
 
 /**
@@ -15,8 +15,8 @@ var user = require('../app/controllers/user')
 module.exports = function (app, passport) {
 
   app.get('/logout', user.logout)
-  app.get('/user/:userId', auth.requiresLogin, auth.user.hasAuthorization, property.userProperties, design.getdesigns, user.store)
-  app.get('/user/:userId/profile', auth.requiresLogin, auth.user.hasAuthorization, property.userProperties, user.show)
+  /* app.get('/user/:userId', auth.requiresLogin, auth.user.hasAuthorization, property.userProperties, design.getdesigns, user.store) */
+  /* app.get('/user/:userId/profile', auth.requiresLogin, auth.user.hasAuthorization, property.userProperties, user.show) */
   app.post('/login', passport.authenticate('local', {
         failureFlash: true
     }), function (req,res) {
