@@ -115,9 +115,9 @@
   
   <div id="campaign-create">
     <h3 class="campaign-create-head-main">Create a Campaign</h3>
-    
+    <form id="campaign-create-form" role="form" action="process-campaign" method="post">
     <div class="col-md-6">
-      <form role="form">
+      
       
       <div class="campaign-create-section campaign-create-section-active" id="campaign-create-section-name">
         <div class="form-group">
@@ -134,7 +134,7 @@
           
           <div class="checkbox">
            <label>
-              <input name="campaign-message-edit" class="campaign-create-input" data-section="message" type="checkbox"> Allow the user to edit this message
+              <input name="campaign-message-edit" value="yes" class="campaign-create-input" data-section="message" type="checkbox"> Allow the user to edit this message
             </label>
           </div>
         </div>
@@ -162,16 +162,16 @@
         <h4 class="campaign-create-head">Social Networks</h4>
         <div class="checkbox">
           <label>
-            <input name="campaign-twitter" class="campaign-create-input" data-section="networks" type="checkbox"> Allow Posting on Twitter
+            <input name="campaign-twitter" value="yes" class="campaign-create-input" data-section="networks" type="checkbox"> Allow Posting on Twitter
           </label>
         </div>
         <div class="checkbox">
           <label>
-            <input name="campaign-facebook" class="campaign-create-input" data-section="networks" type="checkbox"> Allow Posting on Facebook
+            <input name="campaign-facebook" value="yes" class="campaign-create-input" data-section="networks" type="checkbox"> Allow Posting on Facebook
           </label>
         </div>
 </div>
-      </form>
+      
     </div>
     <div class="col-md-6">
       <div class="campaign-create-section" id="campaign-create-section-social-login">
@@ -297,6 +297,7 @@
       <input type="submit" class="btn btn-lg btn-success" value="Create Campaign" />
     </div>
   </div>
+  </form>
   
   </div>
   
@@ -308,7 +309,7 @@
 <script type="text/javascript">
   jQuery(document).ready(function ($)
   {
-    updateMessagePreview();
+    updateMessagePreview(); // on load, update the preview
     
     $('.campaign-create-input').focus(function ()
     {
@@ -316,17 +317,30 @@
       console.log(section);
       $('.campaign-create-section').removeClass('campaign-create-section-active');
       $('#campaign-create-section-' + section).addClass('campaign-create-section-active');
-    });
+    }); // campaign-input focus
     
     $('#campaign-message, #campaign-link').keyup(function ()
     {
       updateMessagePreview();
-    });
+    }); // #campaign-link keyup
     function updateMessagePreview()
     {
       $('#campaign-message-preview').val($('#campaign-message').val() + " " + $('#campaign-link').val());
-    }
-  });
+    } // updateMessagePreview()
+    $('#campaign-create-form').submit(function (e)
+    {
+      e.preventDefault();
+      var data = $(this).serialize();
+      $.ajax({
+        type: "post",
+        url: "process-campaign",
+        data: data
+      }) // ajax post
+      .done(function( msg ) {
+        alert( "Data Saved: " + msg );
+      }); // ajax done
+    }); // campaign-create submit
+  }); // jquery document ready
 </script>
 <footer>
   <div class="container container-fluid">
