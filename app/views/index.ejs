@@ -1,5 +1,171 @@
-extends layout
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
 
-block content
-  h1= title
-  p Welcome to #{title}
+<html>
+<head>
+    <title>Cloud:flood</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+	<style type="text/css">
+		#guest-nav
+		{
+			background-color: #ffffff;
+		}
+		.navbar a.navbar-brand
+		{
+			font-size: 22px;
+		}
+		.home-sign-up-well
+		{
+			background-color: white;
+		}
+		.home-sign-in-head
+		{
+			margin-bottom: 15px;
+		}
+	</style>
+</head>
+
+<body>
+
+
+
+<nav id="guest-nav" class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-cloud"></span> </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">    
+
+<form id="nav-sign-in-wrapper" class="navbar-form navbar-right" style="display:none">
+		    <div class="form-group">
+		      <input type="text" id="nav-email-in" class="form-control" placeholder="Email">
+		      <input type="password" id="nav-pass-in" class="form-control" placeholder="Password">
+		      <input type="submit" class="btn btn-default" value="Sign In">
+		    </div>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+
+		  <li class="right-menu-item nav-sign-in">
+            	<a href="#" id="sign-in">Sign In</a>        	
+		</li>
+            	<li class="right-menu-item nav-about"><a href="#">About</a></li>
+				<li class="right-menu-item nav-jobs"><a href="#">Jobs</a></li>
+				<li class="right-menu-item nav-investors"><a href="#">Investors</a></li>
+            
+            </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+<div class="container-fluid col-xs-12"  >
+<div class="well home-sign-up-well col-sm-4">
+<div class="home-sign-in-head">
+	<h4>Sign up</h4>
+</div>
+<form action="process-signup" id="home-sign-up" role="form">
+  <div id="home-sign-up-error" class="alert alert-danger" style="display:none"></div>
+  <div class="form-group">
+    <label for="home-email">Email address</label>
+    <input type="email" class="form-control" id="home-email" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <label for="home-password">Password</label>
+    <input type="password" class="form-control" id="home-password" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="home-confirm-password">Confirm Password</label>
+    <input type="password" class="form-control" id="home-password-conf" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+</div>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function ($)
+	{
+		$('#sign-in').click(function (e)
+		{
+			e.preventDefault();
+			$('.right-menu-item').hide(0, function ()
+			{
+				$('#nav-sign-in-wrapper').fadeIn();
+			}); // hide
+		}); // click
+		
+		$('#nav-sign-in-wrapper').submit(function (e)
+		{
+			e.preventDefault();
+			var data = {
+				'email': $('#nav-email-in').val(),
+				'pass': $('#nav-pass-in').val()
+			};
+			console.log("Logging in, email " + data.email + " password " + data.pass);
+		}); // submit
+		
+		$('#home-sign-up').submit(function (e)
+		{
+			//e.preventDefault();
+			
+			if (!checkEmail($('#home-email').val()))
+			{
+			  signUpError("The email you provided is not valid. Please try again");
+  		  return false;
+  		} // if
+  		
+  		if (!validateSignUpPass($('#home-password').val(), $('#home-password-conf').val()))
+  		{
+    		return false;
+  		}
+  		
+			var data = {
+				'email': $('#home-email').val(),
+				'pass': $('#home-password').val(),
+				'passConf': $('#home-password-conf').val(),
+			}; // data
+			
+			console.log("Signing up, email: " + data.email + ", pass: " + data.pass + ", conf: " + data.passConf);
+			
+			signupUser(data);
+			
+		}); // submit ()
+		
+		function signUpError(errorText)
+		{
+			$('#home-sign-up-error').text(errorText).show();
+		} // signUpError(String)
+		
+		function checkEmail(val)
+		{
+  		var emailRegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+  		return emailRegExp.test(val);
+		} // checkEmail(String)
+		
+		function validateSignUpPass(pass, conf)
+		{
+		  if (pass.length < 5)
+		  {
+  		  signUpError("Please enter a password longer than 5 characters.");
+				return false;
+		  } // if
+		  else if (pass !== conf)
+			{
+				// the confirmation is bad
+				signUpError("Your password did not match the confirmation. Please try again");
+				return false;
+			} // else if
+			return true;
+		} // validatePass()
+	}); // jQuery document ready
+</script>
+</body>
+</html>
