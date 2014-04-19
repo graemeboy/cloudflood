@@ -174,121 +174,163 @@
       
     </div>
     <div class="col-md-6">
-      <div class="campaign-create-section" id="campaign-create-section-social-login">
-        <h4 class="campaign-create-head">Interface Design - Social Network Login</h4>
-      </div>
-      <div class="campaign-create-section" id="campaign-create-section-post-message">
-        <h4 class="campaign-create-head">Interface Design - Post Message</h4>
-      <style type="text/css">
-        .twitter-logo
-        {
-          width: 48px;
-          height:48px;
-          border: 3px solid #dedede;
-          border-radius: 100%;
-          -webkit-border-radius: 100%;
-          -moz-border-radius: 100%;
-          background-image: url('twitter-48.png');
-          background-color: #00aced;
-          background-repeat: no-repeat;
-          margin: 0 auto;
-          margin-top: -24px;
-        }
-        .share-container
-        {
-          width: 400px;
-          padding-top:20px;
-        }
-        .share-intro
-        {
-          width:300px;
-          margin: 0 auto;
-        }
-        .share-wrapper
-        {
-          margin: 0 auto;
-          margin-top: 50px;
-          border: 1px solid #ccc;
-          width: 300px;
-          height: 140px;
-          border-radius: 8px;
-          -webkit-border-radius: 8px;
-          -moz-border-radius: 8px;
-        }
-        .share-text
-        {
-          border: none;
-          margin-top:10px;
-          width:100%;
-          height: 50px;
-          padding: 5px 15px;
-          resize: none;
-        }
-        .share-text:focus
-        {
-          outline: none;
-        }
-        .share-info
-        {
-      /*     border-top: 1px solid #dedede; */
-          height: 35px;
-          margin-top:10px;
-        }
-        .share-name
-        {
-          color: #777;
-          font-size: 14px;
-        }
-        .share-profile-img
-        {
-          width: 35px;
-          height: 35px;
-          
-        }
-        .share-profile-img img 
-        {
-          width: 32px;
-          height: 32px;
-          opacity: 0.8;
-          margin-top: 5px;
-          margin-left: 5px;
-        }
-        .share-info div
-        {
-          display: inline-block;
-        }
-        .share-send
-        {
-          float: right;
-          margin-top: 10px;
-        }
-        .share-send .btn
-        {
-          text-decoration: none;
-          color: #777;
-          margin-right:5px;;
-          padding: 7px 5px;
-        }
-      </style>
-      <div class="share-container" id="campaign-preview">
-      <div class="share-intro">Post the message below, and the you will be redirected to the product.</div>
-      <div class="share-wrapper">
-        <div class="twitter-logo"></div>
-        <textarea class="share-text" maxlength="140" id="campaign-message-preview">{{message-text}} {{message-link}}</textarea>
-        <div class="share-info">
-         <!--
-       <div class="share-profile-img">
-            <img src="https://pbs.twimg.com/profile_images/428399635573768192/-gX3hvWP_bigger.jpeg"/>
-          </div>
-      -->
-          <!-- <div class="share-name">Signed in as Graeme Boy</div> -->
-          <div class="share-send">
-            <a href="#" class="btn">Post Message</a>
-          </div>
-        </div>
-      </div>
-      </div>
+      <div class="campaign-create-section" id="campaign-create-section-design">
+        <h4 class="campaign-create-head">Interface Design</h4>
+        <style type="text/css">
+.social-modal-container
+{
+  width: 500px;
+  font-family: 'Helvetica Neue', helvetica, sans-serif;
+}
+.share-quote-mark
+{
+  color: #fff;
+  font-size: 36px;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  margin: 0 auto;
+  margin-top:-12px;
+  background-color: #999;
+  line-height: 36px;
+  border-radius: 36px;
+  font-family: 'Times New Roman';
+}
+.share-text
+{
+  border: none;
+  margin-top:10px;
+  width:100%;
+  height: 65px;
+  padding: 5px 15px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  font-family: Georgia,Cambria,"Times New Roman",Times,serif;
+  letter-spacing: .01rem;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 14px;
+  border-left: 3px solid #57ad68;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  overflow: hidden;
+  resize: none;
+}
+.share-text:focus
+{
+  outline: none;
+}
+.facebook-icon, .twitter-icon
+{
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  margin-left: 5px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  float:left;
+}
+.facebook-icon
+{
+  background-image: url('facebook-48.png');
+}
+.twitter-icon
+{
+  background-image: url('twitter-48.png');
+}
+.facebook-signin
+{
+  border: 1px solid #32456F;
+  background: #678bbf; /* Old browsers */
+  background: -moz-linear-gradient(top, #678bbf 0%, #39548c 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#678bbf), color-stop(100%,#39548c)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #678bbf 0%,#39548c 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #678bbf 0%,#39548c 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #678bbf 0%,#39548c 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #678bbf 0%,#39548c 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#678bbf', endColorstr='#39548c',GradientType=0 ); /* IE6-9 */
+}
+.twitter-signin
+{
+  border: 1px solid #32456F;
+  background-color: #1c95d0;
+  background-image: -moz-linear-gradient(top, #2daddc, #0271bf);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2daddc), to(#0271bf));
+  background-image: -webkit-linear-gradient(top, #2daddc, #0271bf);
+  background-image: -o-linear-gradient(top, #2daddc, #0271bf);
+  background-image: linear-gradient(to bottom, #2daddc, #0271bf);
+  background-repeat: repeat-x;
+  border-color: #0271bf #0271bf #014473;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff2daddc', endColorstr='#ff0271bf', GradientType=0);
+}
+.facebook-signin, .twitter-signin
+{
+  height: 46px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  width: 215px;
+  float:left;
+  margin-right: 15px;
+}
+
+.facebook-signin-text, .twitter-signin-text
+{
+  color: #ffffff;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.6);
+  display: inline-block;
+  float:left;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+.word-strong
+{
+  font-weight: 400;
+}
+.word-italic
+{
+  font-style: italic;
+}
+</style>
+<div class="social-modal-container">
+  <div class="social-intro">
+    <h3>Post a Message to Receive the Product</h3>
+    <p>Before accessing this content, the author requests that you post a short message to your social network.</p>
+  </div>
+  <div class="share-container">
+    <div class="share-wrapper">
+      <!-- <div class="share-quote-mark">"</div> -->
+      <textarea class="share-text" maxlength="140">This is my awesome product description. http://www.graemeboy.com</textarea>
     </div>
+    <div style="clear:both"></div>
+    <div class="share-send">          
+      <a href="#" class="facebook-signin">
+        <div class="facebook-icon"></div>
+        <div class="facebook-signin-text">
+            <span class="word-strong">Post</span>
+            <span class="word-italic">via</span>
+            <span class="word-strong">Facebook</span>  
+        </div> <!-- facebook-signin-text -->
+      </a>
+      <a href="#" class="twitter-signin">
+          <div class="twitter-icon"></div>
+          <div class="twitter-signin-text">
+            <span class="word-strong">Post</span>
+            <span class="word-italic">via</span>
+            <span class="word-strong">Twitter</span>  
+          </div> <!-- twitter-signin-text -->
+      </a>
+    </div> <!-- share-send -->
+  </div> <!-- share-container -->
+</div> <!-- social-modal-container -->
+      </div> <!--design-section
+    </div> <!-- col-md-6 -->
     
     </div>
     
