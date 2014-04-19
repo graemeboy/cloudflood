@@ -45,6 +45,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">    
 
 <form id="nav-sign-in-wrapper" class="navbar-form navbar-right" style="display:none">
+  <div class="alert alert-danger" id="navbar-signin-alert" style="display:inline;">Error</div>
 		    <div class="form-group">
 		      <input type="text" id="nav-email-in" class="form-control" placeholder="Email">
 		      <input type="password" id="nav-pass-in" class="form-control" placeholder="Password">
@@ -52,15 +53,12 @@
 		    </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
-
-		  <li class="right-menu-item nav-sign-in">
-            	<a href="#" id="sign-in">Sign In</a>        	
-		</li>
-            	<li class="right-menu-item nav-about"><a href="#">About</a></li>
-				<li class="right-menu-item nav-jobs"><a href="#">Jobs</a></li>
-				<li class="right-menu-item nav-investors"><a href="#">Investors</a></li>
-            
-            </ul>
+  		  <li class="right-menu-item nav-sign-in active">
+          <a href="#" id="sign-in">Sign In</a>        	
+        </li>
+        <li class="right-menu-item nav-about"><a href="#">About</a></li>
+        <li class="right-menu-item nav-careers"><a href="#">Careers</a></li>      
+      </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
@@ -71,7 +69,7 @@
 <div class="home-sign-in-head">
 	<h4>Sign up</h4>
 </div>
-<form action="process-signup" id="home-sign-up" role="form">
+<form action="process-signup" method="post" id="home-sign-up" role="form">
   <div id="home-sign-up-error" class="alert alert-danger" style="display:none"></div>
   <div class="form-group">
     <label for="home-email">Email address</label>
