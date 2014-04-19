@@ -47,6 +47,8 @@ module.exports = function (app, passport, db) {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded());
     
+    //app.use(require('express-validator'));
+    
     app.use(require('method-override')());
     
     // express/mongo session storage
@@ -55,9 +57,7 @@ module.exports = function (app, passport, db) {
       store: new mongoStore({
         db: db.connection.db,
         collection : config.sessionCollection
-      }),
-      key: 'sid',
-      cookie: {secure: true}
+      })
     }));
 
     // need to add store!
@@ -70,6 +70,9 @@ module.exports = function (app, passport, db) {
 
     // should be declared after session and flash
     app.use(helpers(config.app.name));
+    
+    
+    app.use('/', require('../../app/config/routes'));
 
     // adds CSRF support
     if (process.env.NODE_ENV !== 'test') {
@@ -81,8 +84,6 @@ module.exports = function (app, passport, db) {
         next()
       });
     }
-    
-    app.use('/', require('../../app/config/routes'));
     
     app.use(function(err, req, res, next){
 		  console.error(err.stack);

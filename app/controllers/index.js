@@ -1,16 +1,10 @@
 exports.index = function(req, res)
 {
 
-  console.log("in index!");
-  
   // Find out if the user has already logged in.
   // If true, then redirect to the user's store page.
-  if (req.user)
-  {
-    res.redirect("/user/" + req.user.username);
-  }
-  else
-  {
+  if (req.user) {
+    res.redirect("/dashboard");
   }
 
   res.render('index', { 
