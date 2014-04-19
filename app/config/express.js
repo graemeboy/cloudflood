@@ -74,6 +74,7 @@ module.exports = function (app, passport, db) {
     app.use('/', require('../../app/config/routes')(app, passport)); 
     
     // adds CSRF support
+/*
     if (process.env.NODE_ENV !== 'test') {
       app.use(require('csurf')());
 
@@ -83,6 +84,7 @@ module.exports = function (app, passport, db) {
         next()
       });
     }
+*/
     
     app.use(function(err, req, res, next){
 		  console.error(err.stack);

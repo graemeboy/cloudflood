@@ -13,7 +13,7 @@ module.exports = function (app, passport) {
   var router = express.Router();
 
   router.get('/logout', user.logout);
-  router.post('/login', passport.authenticate('local', {
+  router.post('/process-login', passport.authenticate('local', {
     failureRedirect: '/',
     failureFlash: 'Invalid email or password.'
   }), user.session);
