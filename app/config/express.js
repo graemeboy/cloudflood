@@ -4,16 +4,21 @@ var express = require('express')
   , helpers = require('view-helpers')
   , pkg = require('../../package.json')
   , flash = require('connect-flash')
+  , path = require('path')
   , config = require('./config');
 
-//var env = process.env.NODE_ENV || 'development'
+var env = process.env.NODE_ENV || 'development'
 
 module.exports = function (app, passport, db) {
 
   app.set('showStackError', true)
   
   app.locals.pretty = true;
-    
+  
+  if (process.env.NODE_ENV === 'development') {
+    app.use(require('morgan')('dev'));
+  }
+  
   app.use(require('compression') ({
     filter: function(req, res) {
 		  return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
@@ -21,17 +26,12 @@ module.exports = function (app, passport, db) {
 	  level: 9
   }));
   
-  if (process.env.NODE_ENV === 'development') {
-    app.use(require('morgan')('dev'));
-  }
-
-  app.use(require('static-favicon')());
-  app.use(require('serve-static')(config.root + '/public'));
+  app.use(express.static(path.resolve(config.root + '/../public/')));
 
   // set views path, template engine and default layout
   app.set('views', config.root + '/views')
   app.set('view engine', 'ejs')
-
+  
  // app.configure(function () {
     // expose package.json to views
     app.use(function (req, res, next) {
@@ -71,7 +71,8 @@ module.exports = function (app, passport, db) {
     // should be declared after session and flash
     app.use(helpers(config.app.name));
     
-    app.use('/', require('../../app/config/routes')(app, passport)); 
+    // connect router   
+   app.use(require(config.root + '/config/routes')(app, passport)); 
     
     // adds CSRF support
 /*
