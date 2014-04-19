@@ -19,7 +19,7 @@ require('./app/config/passport')(passport,config);
 
 var app = express();
 require('./app/config/express')(app, passport, db);
-require('./app/config/routes')(app, passport);
+//require('./app/config/routes')(app, passport);
 
 app.set('port', process.env.PORT || 3000);
 

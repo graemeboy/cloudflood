@@ -1,8 +1,18 @@
+var express = require('express');
+
+/**
+ * Controllers
+ */
+
+//var user = require('../../app/controllers/user')
+// , index = require('../../app/controllers/index');
+  //, auth = require('./middlewares/authorization')
+
+var router = express.Router();
+
+router.get('/', function (req, res, next) {
+  res.render('index');
+});
 
 
-/* GET home page. */
-module.exports = function(app, passport) {
-  app.get('/', function(req, res) {
-    res.render('index', { title: 'Express' });
-  });
-}
+module.exports = router;

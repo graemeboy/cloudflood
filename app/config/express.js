@@ -29,7 +29,7 @@ module.exports = function (app, passport, db) {
   app.use(require('serve-static')(config.root + '/public'));
 
   // set views path, template engine and default layout
-  app.set('views', config.root + '/app/views')
+  app.set('views', config.root + '/views')
   app.set('view engine', 'ejs')
 
  // app.configure(function () {
@@ -82,6 +82,7 @@ module.exports = function (app, passport, db) {
       });
     }
     
+    app.use('/', require('../../app/config/routes'));
     
     app.use(function(err, req, res, next){
 		  console.error(err.stack);
