@@ -1,2 +1,4 @@
 # ignore any mac cruft
 .DS_STORE
+
+npm-debug.log
