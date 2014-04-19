@@ -1,9 +1,10 @@
 var express = require('express')
-  //, mongoStore = require('connect-mongo')(express)
+  , session = require('express-session')
+  , mongoStore = require('connect-mongo')({session: session})
   , helpers = require('view-helpers')
   , pkg = require('../../package.json')
   , flash = require('connect-flash')
-  , config = require('./config')
+  , config = require('./config');
 
 //var env = process.env.NODE_ENV || 'development'
 
@@ -26,9 +27,6 @@ app.use(express.compress({
   }
 */
 
-  // should be placed before express.static
-  //app.use(require('less-middleware')(config.root + '/public'));
-
   //app.use(express.favicon())
   app.use(express.static(config.root + '/public'))
 
@@ -43,37 +41,35 @@ app.use(express.compress({
       next()
     });
 
-    // cookieParser should be above session
+    // cookieParser should be above 
     var cookieParser = require('cookie-parser')
       , bodyParser = require('body-parser')
       , methodOverride = require ('method-override');
     
-    app.use(cookieParser('secret'));
+    app.use(cookieParser('secret'));/*
+
     app.use(function(req, res, next) {
       res.end(JSON.stringify(req.cookies));
     })
+*/
     
     app.use(bodyParser());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded());
-    app.use(function (req, res, next) {
-      console.log(req.body)
-      next();
-    })
-
-    // bodyParser should be above methodOverride
     app.use(methodOverride());
 
     // express/mongo session storage
-    /*
-app.use(express.session({
+    app.use(session({
       secret: config.sessionSecret,
       store: new mongoStore({
         db: db.connection.db,
         collection : config.sessionCollection
-      })
+      }),
+      key: 'sid',
+      cookie: {secure: true}
     }));
-*/
+
+    // need to add store!
 
     // use passport session
     app.use(passport.initialize());
@@ -83,10 +79,6 @@ app.use(express.session({
 
     // should be declared after session and flash
     app.use(helpers(config.app.name));
-    //app.use(app.router)
-    
-    // NOT SURE IF THIS IS THE WRITE WAY TO DO THIS
-   // app.use(app.router());
 
     // adds CSRF support
     var csrf = require('csurf');
