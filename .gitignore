@@ -1,3 +1,8 @@
 # ignore any mac cruft
 .DS_STORE
+<<<<<<< HEAD
+
+npm-debug.log
+=======
 ./node_modules/
+>>>>>>> 7f2981d2eca790f068cc43fc94f1b2f8d400fe85
