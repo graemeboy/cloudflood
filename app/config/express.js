@@ -13,22 +13,20 @@ module.exports = function (app, passport, db) {
   app.set('showStackError', true)
   
   app.locals.pretty = true;
-  
-  /*
-app.use(express.compress({
-	  filter: function(req, res) {
+    
+  app.use(require('compression') ({
+    filter: function(req, res) {
 		  return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
 	  },
-	  level:9
+	  level: 9
   }));
   
   if (process.env.NODE_ENV === 'development') {
-	  app.use(express.logger('dev'));
+    app.use(require('morgan')('dev'));
   }
-*/
 
-  //app.use(express.favicon())
-  app.use(express.static(config.root + '/public'))
+  app.use(require('static-favicon')());
+  app.use(require('serve-static')(config.root + '/public'));
 
   // set views path, template engine and default layout
   app.set('views', config.root + '/app/views')
@@ -42,22 +40,15 @@ app.use(express.compress({
     });
 
     // cookieParser should be above 
-    var cookieParser = require('cookie-parser')
-      , bodyParser = require('body-parser')
-      , methodOverride = require ('method-override');
+    app.use(require('cookie-parser')('secret'));
     
-    app.use(cookieParser('secret'));/*
-
-    app.use(function(req, res, next) {
-      res.end(JSON.stringify(req.cookies));
-    })
-*/
-    
+    var bodyParser = require('body-parser');
     app.use(bodyParser());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded());
-    app.use(methodOverride());
-
+    
+    app.use(require('method-override')());
+    
     // express/mongo session storage
     app.use(session({
       secret: config.sessionSecret,
@@ -81,9 +72,8 @@ app.use(express.compress({
     app.use(helpers(config.app.name));
 
     // adds CSRF support
-    var csrf = require('csurf');
     if (process.env.NODE_ENV !== 'test') {
-      app.use(csrf());
+      app.use(require('csurf')());
 
       // This could be moved to view-helpers :-)
       app.use(function(req, res, next){
