@@ -27,6 +27,24 @@
   {
     padding: 10px;
   }
+
+  .campaign-create-head-main
+  {
+    margin-bottom: 20px;
+  }
+  .campaign-create-section
+  {
+    padding: 8px 0 8px 15px;
+    border-left: 2px solid #eee;
+  }
+  .campaign-create-section-active
+  {
+    border-left-color: #b0b0ff;
+  }
+  .campaign-submit-wrapper
+  {
+    margin-top: 20px;
+  }
 </style>
 
 </head>
@@ -96,31 +114,36 @@
   </div>
   
   <div id="campaign-create">
-    <h3>Create a Campaign</h3>
+    <h3 class="campaign-create-head-main">Create a Campaign</h3>
     
-    <div class="col-md-5">
+    <div class="col-md-6">
       <form role="form">
+      
+      <div class="campaign-create-section campaign-create-section-active" id="campaign-create-section-name">
         <div class="form-group">
           <label for="campaign-name">Campaign Name</label>
-          <input type="text" class="form-control" id="campaign-name" placeholder="My campaign">
+          <input type="text" class="form-control campaign-create-input" data-section="name" id="campaign-name" placeholder="My campaign">
         </div>
-        <h4>Your Message</h4>
+      </div>
+      <div class="campaign-create-section" id="campaign-create-section-message">
+        <h4 class="campaign-create-head">Your Message</h4>
         <div class="form-group">
           <label for="">Tweet or Status to be Shared</label>
           <p>Write a message here that you want to your audience to share</p>
-          <textarea type="text" name="campaign-message" class="form-control" id="campaign-message" placeholder="Your tweet / status"></textarea>
+          <textarea type="text" name="campaign-message" class="form-control campaign-create-input" id="campaign-message" placeholder="Your tweet / status" data-section="message"></textarea>
           
           <div class="checkbox">
            <label>
-              <input name="campaign-message-edit" type="checkbox"> Allow the user to edit this message
+              <input name="campaign-message-edit" class="campaign-create-input" data-section="message" type="checkbox"> Allow the user to edit this message
             </label>
           </div>
         </div>
         <div class="form-group">
           <label for="campaign-link">Link to share (Optional)</label>
           <p>Add a link included in this message, if you want</p>
-          <input type="text" class="form-control" name="campaign-message" id="campaign-link" placeholder="http://">
+          <input type="text" class="form-control campaign-create-input" data-section="message" name="campaign-link" id="campaign-link" placeholder="http://">
         </div>
+      </div>
         <!--
 <div class="form-group">
           <label for="exampleInputFile">File input</label>
@@ -128,38 +151,183 @@
           <p class="help-block">Example block-level help text here.</p>
         </div>
 -->
-        <h4>Your Product Link</h4>
+<div class="campaign-create-section" id="campaign-create-section-product">
+        <h4 class="campaign-create-head">Your Product Link</h4>
         <div class="form-group">
           <p>Where does the user go after sharing your message?</p>
-          <input type="text" class="form-control" name="campaign-product" id="campaign-product" placeholder="http://">
+          <input type="text" class="form-control campaign-create-input" data-section="product" name="campaign-product" id="campaign-product" placeholder="http://">
         </div>
-          
-        <h4>Social Networks</h4>
+</div>
+<div class="campaign-create-section" id="campaign-create-section-networks">
+        <h4 class="campaign-create-head">Social Networks</h4>
         <div class="checkbox">
           <label>
-            <input name="campaign-twitter" type="checkbox"> Allow Posting on Twitter
+            <input name="campaign-twitter" class="campaign-create-input" data-section="networks" type="checkbox"> Allow Posting on Twitter
           </label>
         </div>
         <div class="checkbox">
           <label>
-            <input name="campaign-facebook" type="checkbox"> Allow Posting on Facebook
+            <input name="campaign-facebook" class="campaign-create-input" data-section="networks" type="checkbox"> Allow Posting on Facebook
           </label>
         </div>
+</div>
       </form>
     </div>
-    <div class="col-md-7">
-      
+    <div class="col-md-6">
+      <div class="campaign-create-section" id="campaign-create-section-social-login">
+        <h4 class="campaign-create-head">Interface Design - Social Network Login</h4>
+      </div>
+      <div class="campaign-create-section" id="campaign-create-section-post-message">
+        <h4 class="campaign-create-head">Interface Design - Post Message</h4>
+      <style type="text/css">
+        .twitter-logo
+        {
+          width: 48px;
+          height:48px;
+          border: 3px solid #dedede;
+          border-radius: 100%;
+          -webkit-border-radius: 100%;
+          -moz-border-radius: 100%;
+          background-image: url('twitter-48.png');
+          background-color: #00aced;
+          background-repeat: no-repeat;
+          margin: 0 auto;
+          margin-top: -24px;
+        }
+        .share-container
+        {
+          width: 400px;
+          padding-top:20px;
+        }
+        .share-intro
+        {
+          width:300px;
+          margin: 0 auto;
+        }
+        .share-wrapper
+        {
+          margin: 0 auto;
+          margin-top: 50px;
+          border: 1px solid #ccc;
+          width: 300px;
+          height: 140px;
+          border-radius: 8px;
+          -webkit-border-radius: 8px;
+          -moz-border-radius: 8px;
+        }
+        .share-text
+        {
+          border: none;
+          margin-top:10px;
+          width:100%;
+          height: 50px;
+          padding: 5px 15px;
+          resize: none;
+        }
+        .share-text:focus
+        {
+          outline: none;
+        }
+        .share-info
+        {
+      /*     border-top: 1px solid #dedede; */
+          height: 35px;
+          margin-top:10px;
+        }
+        .share-name
+        {
+          color: #777;
+          font-size: 14px;
+        }
+        .share-profile-img
+        {
+          width: 35px;
+          height: 35px;
+          
+        }
+        .share-profile-img img 
+        {
+          width: 32px;
+          height: 32px;
+          opacity: 0.8;
+          margin-top: 5px;
+          margin-left: 5px;
+        }
+        .share-info div
+        {
+          display: inline-block;
+        }
+        .share-send
+        {
+          float: right;
+          margin-top: 10px;
+        }
+        .share-send .btn
+        {
+          text-decoration: none;
+          color: #777;
+          margin-right:5px;;
+          padding: 7px 5px;
+        }
+      </style>
+      <div class="share-container" id="campaign-preview">
+      <div class="share-intro">Post the message below, and the you will be redirected to the product.</div>
+      <div class="share-wrapper">
+        <div class="twitter-logo"></div>
+        <textarea class="share-text" maxlength="140" id="campaign-message-preview">{{message-text}} {{message-link}}</textarea>
+        <div class="share-info">
+         <!--
+       <div class="share-profile-img">
+            <img src="https://pbs.twimg.com/profile_images/428399635573768192/-gX3hvWP_bigger.jpeg"/>
+          </div>
+      -->
+          <!-- <div class="share-name">Signed in as Graeme Boy</div> -->
+          <div class="share-send">
+            <a href="#" class="btn">Post Message</a>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    
     </div>
     
     <div class="clearfix"></div>
-    <div class="campaign-submit-wrapper">
-      <input type="submit" class="btn btn-success" value="Create Campaign" />
+     <div class="campaign-submit-wrapper">
+      <input type="submit" class="btn btn-lg btn-success" value="Create Campaign" />
     </div>
   </div>
   
   </div>
+  
+  <div id="campaign-stats">
+    <h3>Campaign Stats</h3>
+  </div>
 </div>
 
+<script type="text/javascript">
+  jQuery(document).ready(function ($)
+  {
+    updateMessagePreview();
+    
+    $('.campaign-create-input').focus(function ()
+    {
+      var section = $(this).attr('data-section');
+      console.log(section);
+      $('.campaign-create-section').removeClass('campaign-create-section-active');
+      $('#campaign-create-section-' + section).addClass('campaign-create-section-active');
+    });
+    
+    $('#campaign-message, #campaign-link').keyup(function ()
+    {
+      updateMessagePreview();
+    });
+    function updateMessagePreview()
+    {
+      $('#campaign-message-preview').val($('#campaign-message').val() + " " + $('#campaign-link').val());
+    }
+  });
+</script>
 <footer>
   <div class="container container-fluid">
     <p>This is the footer</p>

@@ -18,11 +18,80 @@
 		.home-sign-up-well
 		{
 			background-color: white;
+			color: #333;
+		}
+		.home-sign-up-well h4
+		{
+  		margin-top:0;
 		}
 		.home-sign-in-head
 		{
 			margin-bottom: 15px;
 		}
+		
+		/* Fade in Right */
+		.fadeInRight {
+      -webkit-animation-name: fadeInRight;
+      animation-name: fadeInRight;
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+    @-webkit-keyframes fadeInRight {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateX(20px);
+      transform: translateX(20px);
+    }
+  
+    100% {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes fadeInRight {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateX(20px);
+      -ms-transform: translateX(20px);
+      transform: translateX(20px);
+    }
+  
+    100% {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+      transform: translateX(0);
+    }
+  }
+  .home-section-signup
+  {
+    margin-top:-20px;
+    padding: 40px 0;
+    background-image: url('signup-bg.jpg');
+    color: #fff;
+  }
+  .home-section-signup h3
+  {
+    margin-top: 30px;
+    font-size: 38px;
+    line-height: 110%;
+    font-weight: 400;
+  }
+  .home-section-signup h4
+  {
+    font-size: 22px;
+    margin-top: 20px;
+    line-height: 140%;
+    font-weight: 300;
+  }
+  .home-section-signup h3, .home-section-signup h4
+  {
+    font-family: 'Helvetica Neue', helvetica;
+  }
 	</style>
 </head>
 
@@ -44,11 +113,10 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">    
 
-<form id="nav-sign-in-wrapper" class="navbar-form navbar-right" style="display:none">
-  <div class="alert alert-danger" id="navbar-signin-alert" style="display:inline;">Error</div>
+<form id="nav-sign-in-wrapper" method="post" action="process-login" class="navbar-form navbar-right" style="display:none">
 		    <div class="form-group">
-		      <input type="text" id="nav-email-in" class="form-control" placeholder="Email">
-		      <input type="password" id="nav-pass-in" class="form-control" placeholder="Password">
+		      <input type="text" id="nav-email-in" name="email" class="form-control" placeholder="Email">
+		      <input type="password" id="nav-pass-in" name="password" class="form-control" placeholder="Password">
 		      <input type="submit" class="btn btn-default" value="Sign In">
 		    </div>
       </form>
@@ -63,31 +131,35 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-
-<div class="container-fluid col-xs-12"  >
-<div class="well home-sign-up-well col-sm-4">
-<div class="home-sign-in-head">
-	<h4>Sign up</h4>
-</div>
-<form action="process-signup" method="post" id="home-sign-up" role="form">
-  <div id="home-sign-up-error" class="alert alert-danger" style="display:none"></div>
-  <div class="form-group">
-    <label for="home-email">Email address</label>
-    <input type="email" name="email" class="form-control" id="home-email" placeholder="Enter email">
-  </div>
-  <div class="form-group">
-    <label for="home-password">Password</label>
-    <input type="password" name="password" class="form-control" id="home-password" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="home-confirm-password">Confirm Password</label>
-    <input type="password" name="passwordConf" class="form-control" id="home-password-conf" placeholder="Password">
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
-
-</div>
-</div>
+<div class="home-section home-section-signup">
+  <div class="container">
+    <div class="well home-sign-up-well col-sm-4 fadeInRight">
+      <div class="home-sign-in-head">
+      	<h4>Sign up</h4>
+      </div>
+      <form action="process-signup" method="post" id="home-sign-up" role="form">
+        <div id="home-sign-up-error" class="alert alert-danger" style="display:none"></div>
+        <div class="form-group">
+          <label for="home-email">Email address</label>
+          <input type="email" name="email" class="form-control" id="home-email" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+          <label for="home-password">Password</label>
+          <input type="password" name="password" class="form-control" id="home-password" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="home-confirm-password">Confirm Password</label>
+          <input type="password" name="passwordConf" class="form-control" id="home-password-conf" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div> <!-- .well .col-sm-4 -->
+    <div class="col-sm-7 col-sm-offset-1">
+      <h3>Exchange your products for social sharing</h3>
+      <h4>Create social campaigns for your products, so that you can get social payment.</h4>
+    </div>
+  </div> <!-- .container -->
+</div> <!-- .home-section -->
 <script type="text/javascript">
 	jQuery(document).ready(function ($)
 	{
@@ -102,7 +174,7 @@
 		
 		$('#nav-sign-in-wrapper').submit(function (e)
 		{
-			e.preventDefault();
+			//e.preventDefault();
 			var data = {
 				'email': $('#nav-email-in').val(),
 				'pass': $('#nav-pass-in').val()
@@ -124,17 +196,6 @@
   		{
     		return false;
   		}
-  		
-			var data = {
-				'email': $('#home-email').val(),
-				'pass': $('#home-password').val(),
-				'passConf': $('#home-password-conf').val(),
-			}; // data
-			
-			console.log("Signing up, email: " + data.email + ", pass: " + data.pass + ", conf: " + data.passConf);
-			
-			signupUser(data);
-			
 		}); // submit ()
 		
 		function signUpError(errorText)
