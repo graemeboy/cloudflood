@@ -38,7 +38,7 @@ module.exports = function (app, passport) {
     }), user.authCallback)
     
   router.param('campaignId', campaign.campaign);
-  router.get('/:campaignId', campaign.display);
+  router.get('/campaign/:campaignId', campaign.display);
   router.get('/dashboard/:campaignId', campaign.details);
   router.get('/dashboard/:campaignId/edit', campaign.edit);
   router.get('/dashboard/:campaignId/stats', campaign.stats);
