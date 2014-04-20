@@ -94,7 +94,7 @@ exports.edit = function(req, res, next) {
 }
 
 exports.make = function(req, res, next) {
-    res.render('dashboard/edit');
+    res.render('dashboard/campaign');
 }
 exports.details = function(req, res, next) {
     res.render('dashboard/details', {
