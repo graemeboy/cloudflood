@@ -22,10 +22,10 @@ module.exports = function (app, passport) {
   
   router.post('/process-campaign', campaign.create);
   
-  
-
   router.get('/campaign/:campaignId/twitter', campaign.postTwitter);
   router.get('/twitter/callback/', campaign.twitterCallback);
+  
+  router.get('/campaign/thankyou', campaign.endpoint);
     
   router.param('campaignId', campaign.campaign);
   router.get('/campaign/:campaignId', campaign.display);

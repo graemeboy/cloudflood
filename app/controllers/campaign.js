@@ -168,6 +168,9 @@ exports.stats = function(req, res, next) {
     })
 }
 
+exports.endpoint = function(req, res, next) {
+    res.render('campaign-end')
+}
 
 exports.twitterCallback = function (req, res, next) {
   twitter.getAccessToken(req.session.requestToken, req.session.requestTokenSecret, req.query.oauth_verifier, function(error, accessToken, accessTokenSecret, results) {
@@ -185,7 +188,7 @@ exports.twitterCallback = function (req, res, next) {
           req.flash('error', error);
         }
         else {
-          
+          req.redirect('/campaign/thankyou');
         }
       })
     }
