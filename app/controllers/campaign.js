@@ -74,7 +74,7 @@ console.log("success");
             res.end(campaign._id.toString()); 
 */// return the ID number of the campaign
             req.flash('success', 'New Campaign created!');
-            return res.redirect('/dashboard/'+campaign._id);
+            res.redirect('/dashboard/'+campaign._id);
         }
         // set up campaign redirect
         //
