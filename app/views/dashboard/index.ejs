@@ -1,6 +1,27 @@
 <%= include header %>
-  <div id="campaign-list" style="display:none">
-    <h3>Your Campaigns</h3>
+  <style type="text/css">
+    .dashboard-campaign-name
+    {
+      color: #2290bf;
+      outline: 0 none;  
+    }
+    
+  </style>
+  <div id="campaign-list">
+    <h1>Your Campaigns</h1>
+    
+    <div class="dashboard-campaign">
+      <h3>
+        <a class="dashboard-campaign-name" href="/campaign/123">My first campaign</a>
+      </h3>
+    </div>
+    
+<!--     <div>You have not created any campaigns yet.</div> -->
+
+
+
+
+<!--
     <table class="table">
       <thead>
         <th class="campaigns-head-name">Name</th>
@@ -25,20 +46,12 @@
         </tr>
       </tbody>
     </table>
-    <div>You have not created any campaigns yet.</div>
+-->
+    
   </div>
   
-  <div id="campaign-create">
-    <%= include create_campaign %>
-  </div> <!-- #campaign-create -->
     
-    <div class="clearfix"></div>
-     <div class="campaign-submit-wrapper">
-      <input type="submit" class="btn btn-lg btn-success" value="Create Campaign" />
-    </div>
-  </div>
-  </form>
-  </div>
+    
   <div id="campaign-stats" style="display:none;">
     <%= include stats %>
   </div>
