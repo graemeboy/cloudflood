@@ -34,7 +34,7 @@ exports.create = function (req, res, next) {
     var user = new User(req.body);
     
     user.roles = ['authenticated'];
-  user.save(function(err) {
+    user.save(function(err) {
       if (err) {
           return res.redirect('/', {
             user: user,

@@ -60,7 +60,7 @@ if (validator.isURL(req.body['campaign-logo'])) {
     style.headingColor = req.body['style-color-heading'] == 'undefined' ? '' : req.body['style-color-heading'];
     style.paragraphColor = req.body['style-color-paragraph'] == 'undefined' ? '' : req.body['style-color-paragraph'];
     style.securityColor = req.body['style-color-security'] == 'undefined' ? '' : req.body['style-color-security'];
-    style.backgroundColor = req.body['style-color-background'] == 'undefined' ? '' : req.body['style-color-background'];;
+    style.backgroundColor = req.body['style-color-background'] == 'undefined' ? '' : req.body['style-color-background'];
     style.messageColor = req.body['style-color-message'] == 'undefined' ? '' : req.body['style-color-message'];
     camData.style = style;
     camData.message_edit = req.body["campaign-message-edit"] === 'yes' ? true : false;
