@@ -100,12 +100,15 @@ exports.display = function(req, res, next) {
 
 exports.edit = function(req, res, next) {
     res.render('dashboard/campaign', {
+        title: 'Edit your campaign',
         campaign: req.campaign
     })
 }
 
 exports.make = function(req, res, next) {
-    res.render('dashboard/campaign');
+    res.render('dashboard/campaign', {
+      title: 'Create a new campaign'
+    });
 }
 
 exports.details = function(req, res, next) {
