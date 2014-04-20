@@ -1,13 +1,18 @@
-<div>
-<div class="details-name">My first campaign</div>
-<div class="details-redirect"><a href="#">http://www.google.com</a></div>
+<%= include header %>
+<h1 class="details-name">My first campaign</h1>
+<div class="container">
+<h4><a href="/dashboard/.id./edit">Edit Campaign</a></h4>
 
-<div class="details-head">Embed</div>
+<h3 class="details-head">How to Embed</h3>
+<p>All you need to do to embed the button into your site, is copy some of the code below, and paste it into your web page.</p>
+<h4>Embed as a button</h4>
+<pre>
+&lt;button onclick=&quot;window.open('http://localhost:3000/campaign/535349f3ac01292a33eae979','_blank','height=400,width=540,toolbar=no,fullscreen=no,location=no,resizable=no')&quot;&gt;Try it&lt;/button&gt;
+</pre>
 
-<div>As button</div>
-<button onclick="window.open('http://localhost:3000/campaign/535349f3ac01292a33eae979','_blank','height=400,width=540,toolbar=no,fullscreen=no,location=no,resizable=no')">Try it</button>
-
-<div>As link</div>
-<a href="#" onclick="window.open('http://localhost:3000/campaign/535349f3ac01292a33eae979','_blank','height=400,width=540,toolbar=no,fullscreen=no,location=no,resizable=no')">Try it</button>
-
+<h4>Embed as a link</h4>
+<pre>
+&lt;a href=&quot;#&quot; onclick=&quot;window.open('http://localhost:3000/campaign/535349f3ac01292a33eae979','_blank','height=400,width=540,toolbar=no,fullscreen=no,location=no,resizable=no')&quot;&gt;Try it&lt;/button&gt;
+</pre>
 </div>
+<%= include footer %>
