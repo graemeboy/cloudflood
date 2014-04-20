@@ -188,7 +188,7 @@ exports.twitterCallback = function (req, res, next) {
           //req.flash('error', error);
         }
         else {
-          res.redirect('/campaign/thankyou');
+          return res.redirect('/campaign/thankyou');
         }
       })
     }
