@@ -83,7 +83,10 @@ req.flash('error', err)
 }
 
 exports.posted = function(req, res, next) {
-  res.redirect(req.campaign.callback);
+
+  console.log(req.accessToken)
+  console.log('posted')
+  //res.redirect(req.campaign.callback);
 }
 
 exports.display = function(req, res, next) {
