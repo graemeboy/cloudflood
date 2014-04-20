@@ -6,6 +6,8 @@
 
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+    <script src="js/iris.min.js"></script>
 <style type="text/css">
   #member-nav
   {
@@ -44,6 +46,63 @@
   .campaign-submit-wrapper
   {
     margin-top: 20px;
+  }
+  .campaign-create-preview-inner
+  {
+
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  .campaign-create-picker-preview
+  {
+    display:inline-block;
+    background-color: #333;
+    margin-right: -3px; 
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-color: #ccc;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    float:left;
+    height:31px;
+    width:31px;
+  }
+  .campaign-create-picker-select
+  {
+    display:inline-block;
+    width:200px;
+  }
+  .campaign-create-color-picker
+  {
+    display:none;
+    width:70px;
+  }
+  #campaign-paragraph
+  {
+    height: 85px;
+  }
+  .preview-fixed
+  {
+    position:fixed;
+    top:0;
+    left:0;
   }
 </style>
 
@@ -144,6 +203,85 @@
           <input type="text" class="form-control campaign-create-input" data-section="message" name="campaign-link" id="campaign-link" placeholder="http://">
         </div>
       </div>
+      
+      <div class="campaign-create-section" id="campaign-create-section-design">
+        <h4 class="campaign-create-head">User Interface (Preview to the right)</h4>
+        <div class="form-group col-sm-12">
+          <label for="campaign-heading" class="col-sm-12">Interface Heading</label>
+          <div class="col-sm-8">
+          <input type="text" class="form-control campaign-create-input" data-section="design" name="campaign-heading" id="campaign-heading" value="Post a Message to Receive the Product">
+          </div> <!-- sm-8 -->
+          <div class="col-sm-4">
+            
+            <div class="campaign-create-picker-select">
+            <div class="campaign-create-picker-preview" id="social-intro-heading-preview"></div>
+              <a class="campaign-create-picker-btn btn btn-default" data-target="campaign-create-color-picker-heading" href="#">
+                <span id="campaign-create-social-intro-heading-btn-text" data-target="campaign-create-color-picker-heading" style="font-size:12px;">Select Color</span></a>
+              <input type="text" id="campaign-create-color-picker-heading" class='form-control campaign-create-color-picker' data-target="social-intro-heading" value="#333333" />
+            </div> <!-- picker-select -->
+          </div> <!-- sm-4 -->
+          <div class="clearfix"></div>
+        </div> <!-- sm-12 -->
+        <div class="form-group col-sm-12">
+            <label for="campaign-heading" class="col-sm-12">Interface Body</label>
+            <p>What should your users know before they post this message?</p>
+            <div class="col-sm-8">
+            <textarea class="form-control campaign-create-input" data-section="design" name="campaign-paragraph" id="campaign-paragraph">Before accessing this content, the author requests that you post a short message to your social network.</textarea>
+            </div>
+            <div class="col-sm-4">
+            
+            <div class="campaign-create-picker-select">
+            <div class="campaign-create-picker-preview" id="social-intro-paragraph-preview"></div>
+              <a class="campaign-create-picker-btn btn btn-default" data-target="campaign-create-color-picker-paragraph" href="#">
+                <span id="campaign-create-social-intro-paragraph-btn-text" data-target="campaign-create-color-picker-paragraph" style="font-size:12px;">Select Color</span></a>
+              <input type="text" id="campaign-create-color-picker-paragraph" class='form-control campaign-create-color-picker' data-target="social-intro-paragraph" value="#333333" />
+            </div> <!-- picker-select -->
+          </div> <!-- sm-4 -->
+        </div>
+        <div class="form-group col-sm-12">
+          <label for="campaign-security" class="col-sm-12">Security Promise</label>
+          <div class="col-sm-8">
+          <input type="text" class="form-control campaign-create-input" data-section="design" name="campaign-security" id="campaign-security" value="We'll never post without your permission!">
+          </div>
+          <div class="col-sm-4">
+            
+            <div class="campaign-create-picker-select">
+            <div class="campaign-create-picker-preview" id="social-intro-security-preview"></div>
+              <a class="campaign-create-picker-btn btn btn-default" data-target="campaign-create-color-picker-security" href="#">
+                <span id="campaign-create-social-intro-security-btn-text" data-target="campaign-create-color-picker-security" style="font-size:12px;">Select Color</span></a>
+              <input type="text" id="campaign-create-color-picker-security" class='form-control campaign-create-color-picker' data-target="post-security" value="#333333" />
+            </div> <!-- picker-select -->
+          </div> <!-- sm-4 -->
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-sm-4">
+          <label for="campaign-background-color" class="col-sm-12">Background Color</label>
+          <div class="campaign-create-picker-select">
+            <div class="campaign-create-picker-preview" style="background-color:#ffffff" id="social-intro-background-preview"></div>
+              <a class="campaign-create-picker-btn btn btn-default" data-target="campaign-create-color-picker-background" href="#">
+                <span id="campaign-create-social-intro-background-btn-text" data-target="campaign-create-color-picker-background" style="font-size:12px;">Select Color</span></a>
+              <input type="text" id="campaign-create-color-picker-background" class='form-control campaign-create-color-picker' data-target="social-intro-background" value="#ffffff" />
+            </div> <!-- picker-select -->
+            
+        </div> <!-- sm-4 -->
+        
+        <div class="col-sm-4">
+          <label for="campaign-share-text-color" class="col-sm-12">Message Text Color</label>
+          <div class="campaign-create-picker-select">
+            <div class="campaign-create-picker-preview" id="share-text-preview"></div>
+              <a class="campaign-create-picker-btn btn btn-default" data-target="campaign-create-color-picker-share-text" href="#">
+                <span id="campaign-create-social-intro-share-text-btn-text" data-target="campaign-create-color-picker-share-text" style="font-size:12px;">Select Color</span></a>
+              <input type="text" id="campaign-create-color-picker-share-text" class='form-control campaign-create-color-picker' data-target="share-text" value="#fff" />
+            </div> <!-- picker-select -->
+            
+        </div> <!-- sm-4 -->
+        
+        <div class="col-sm-4">
+          <label for="campaign-font" class="col-sm-12">Font Type</label>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      
         <!--
 <div class="form-group">
           <label for="exampleInputFile">File input</label>
@@ -151,35 +289,39 @@
           <p class="help-block">Example block-level help text here.</p>
         </div>
 -->
-<div class="campaign-create-section" id="campaign-create-section-product">
-        <h4 class="campaign-create-head">Your Product Link</h4>
-        <div class="form-group">
-          <p>Where does the user go after sharing your message?</p>
-          <input type="text" class="form-control campaign-create-input" data-section="product" name="campaign-product" id="campaign-product" placeholder="http://">
-        </div>
-</div>
-<div class="campaign-create-section" id="campaign-create-section-networks">
-        <h4 class="campaign-create-head">Social Networks</h4>
-        <div class="checkbox">
+
+  <div class="campaign-create-section" id="campaign-create-section-product">
+    <h4 class="campaign-create-head">Redirect Link</h4>
+    <div class="form-group">
+      <p>Where does the user go after sharing your message?</p>
+      <input type="text" class="form-control campaign-create-input" data-section="product" name="campaign-product" id="campaign-product" placeholder="http://">
+    </div> <!-- form-group -->
+  </div> <!-- create-section product -->
+  <div class="campaign-create-section" id="campaign-create-section-networks">
+    <h4 class="campaign-create-head">Social Networks</h4>
+      <div class="checkbox">
           <label>
-            <input name="campaign-twitter" value="yes" class="campaign-create-input" data-section="networks" type="checkbox"> Allow Posting on Twitter
+            <input name="campaign-twitter" value="yes" class="campaign-create-input" id="campaign-create-checkbox-twitter" data-section="networks" type="checkbox" checked="checked"> Allow Posting on Twitter
           </label>
         </div>
         <div class="checkbox">
           <label>
-            <input name="campaign-facebook" value="yes" class="campaign-create-input" data-section="networks" type="checkbox"> Allow Posting on Facebook
+            <input name="campaign-facebook" value="yes" class="campaign-create-input" id="campaign-create-checkbox-facebook" data-section="networks" type="checkbox" checked="checked"> Allow Posting on Facebook
           </label>
         </div>
 </div>
       
     </div>
     <div class="col-md-6">
-      <div class="campaign-create-section" id="campaign-create-section-design">
-        <h4 class="campaign-create-head">Interface Design</h4>
+      <div class="campaign-create-preview" id="campaign-create-section-preview">
+        <h3 class="campaign-create-head">Preview</h3>
+        <p>Once your users click on the button, they will see this popup box.</p>
+        <div class="campaign-create-preview-inner">
         <style type="text/css">
 .social-modal-container
 {
   width: 500px;
+  padding: 10px 20px;
   font-family: 'Helvetica Neue', helvetica, sans-serif;
 }
 .share-quote-mark
@@ -226,10 +368,12 @@
   width: 48px;
   height: 48px;
   display: inline-block;
-  margin-left: 5px;
+  overflow: hidden;
+  position: absolute;
+  left: 5px;
+  top: 0;
   background-repeat: no-repeat;
   background-position: center center;
-  float:left;
 }
 .facebook-icon
 {
@@ -274,6 +418,7 @@
   width: 215px;
   float:left;
   margin-right: 15px;
+  position: relative
 }
 
 .facebook-signin-text, .twitter-signin-text
@@ -285,9 +430,10 @@
   font-size: 16px;
   text-shadow: 0 1px 1px rgba(0,0,0,0.6);
   display: inline-block;
-  float:left;
-  margin-top: 15px;
-  margin-left: 10px;
+  position: absolute;
+  top: 15px;
+  left: 60px;
+  line-height: 1;
 }
 .word-strong
 {
@@ -297,16 +443,22 @@
 {
   font-style: italic;
 }
-</style>
+.post-secure
+{
+  font-style: italic;
+  text-align: center;
+  margin-top:5px;
+  font-size: 13px;
+}</style>
 <div class="social-modal-container">
   <div class="social-intro">
-    <h3>Post a Message to Receive the Product</h3>
-    <p>Before accessing this content, the author requests that you post a short message to your social network.</p>
+    <h3 id="social-intro-heading"></h3>
+    <p id="social-intro-paragraph"></p>
   </div>
   <div class="share-container">
     <div class="share-wrapper">
       <!-- <div class="share-quote-mark">"</div> -->
-      <textarea class="share-text" maxlength="140">This is my awesome product description. http://www.graemeboy.com</textarea>
+      <textarea class="share-text" id="campaign-message-preview" maxlength="140">This is my awesome product description. http://www.graemeboy.com</textarea>
     </div>
     <div style="clear:both"></div>
     <div class="share-send">          
@@ -327,8 +479,11 @@
           </div> <!-- twitter-signin-text -->
       </a>
     </div> <!-- share-send -->
+    <div style="clear:both"></div>
+    <div class="post-secure" id="post-security">We'll never post without your permission!</div>
   </div> <!-- share-container -->
 </div> <!-- social-modal-container -->
+        </div><!-- preview-inner -->
       </div> <!--design-section
     </div> <!-- col-md-6 -->
     
@@ -351,20 +506,109 @@
 <script type="text/javascript">
   jQuery(document).ready(function ($)
   {
-    updateMessagePreview(); // on load, update the preview
+    var previewOffset = $('#campaign-create-section-preview').offset();
+    $('#campaign-create-section-preview').css('left', previewOffset.left);
     
+    $(window).scroll(function(){
+      console.log($(this).scrollTop() + ' vs ' + previewOffset.top);
+      if ($(this).scrollTop() > previewOffset.top) 
+      {
+          $('#campaign-create-section-preview').addClass('preview-fixed');
+      }  // if
+      else 
+      {
+          $('#campaign-create-section-preview').removeClass('preview-fixed');
+      } // else
+    }); // window scroll
+    
+    
+    var pickerTarget;
+    updateMessagePreview(); // on load, update the preview
+    updateInterfacePreview();
+    $('.campaign-create-picker-btn, .campaign-create-picker-btn span').click(function (e)
+    {
+      e.preventDefault();
+
+      $('#' + $(this).attr('data-target')).iris('show');
+    });
+    
+    // Twitter and Facebook Listeners
+    $('#campaign-create-checkbox-twitter').change(function ()
+    {
+      $('.twitter-signin').toggle();
+    });
+    $('#campaign-create-checkbox-facebook').change(function ()
+    {
+      $('.facebook-signin').toggle();
+    });
+    
+    $('.campaign-create-color-picker').each(function ()
+    {
+     $(this).iris({
+       change: function (event, ui) {
+        pickerTarget = $(this).attr('data-target');
+          if (pickerTarget === 'social-intro-background')
+          {
+            $('.social-modal-container, #campaign-message-preview').css('background-color', ui.color.toString());
+          } // if
+          else if (pickerTarget === 'share-text')
+          {
+            $('.share-text').css('color', ui.color.toString());
+          }
+          else
+          {
+            $('#' + pickerTarget).css('color', ui.color.toString());   
+          } // else
+         
+         $('#' + pickerTarget + '-preview').css('background-color', ui.color.toString());
+         $('#campaign-create-' + $(this).attr('data-target') + '-btn-text').text(ui.color.toString())
+       } // change
+     }); // .iris
+    }); // . each
+    // Hide iris on document click
+    listenHideIris();
+     
+     function listenHideIris()
+     {
+       $('#campaign-create').click(function(e) {
+  			if (!$(e.target).is('input[type="submit"], a') ) 
+  			{
+  				if (!$(e.target).is(".campaign-create-color-picker, .campaign-create-picker-btn span, .iris-picker, .iris-picker-inner, input[type='checkbox'], label")) {
+  					$('.campaign-create-color-picker').iris('hide');
+  					$('.campaign-create-color-picker').hide();
+  					return false;
+  				} // if
+  				$('.campaign-create-color-picker').click(function() {
+  					$('.campaign-create-color-picker').iris('hide');
+  					$(this).iris('show');
+  					return false;
+  				}); // .color-picker click
+  			} // if
+  		}); // document.click
+     }
     $('.campaign-create-input').focus(function ()
     {
-      var section = $(this).attr('data-section');
-      console.log(section);
       $('.campaign-create-section').removeClass('campaign-create-section-active');
-      $('#campaign-create-section-' + section).addClass('campaign-create-section-active');
-    }); // campaign-input focus
+      $('#campaign-create-section-' + $(this).attr('data-section')).addClass('campaign-create-section-active');
+    });
     
     $('#campaign-message, #campaign-link').keyup(function ()
     {
       updateMessagePreview();
     }); // #campaign-link keyup
+    
+    $('#campaign-heading, #campaign-paragraph, #campaign-security').keyup(function ()
+    {
+      updateInterfacePreview();  
+    }); // #campaign-heading keyup
+    
+    function updateInterfacePreview ()
+    {
+      $('#social-intro-heading').text($('#campaign-heading').val());
+      $('#social-intro-paragraph').text($('#campaign-paragraph').val());
+      $('#post-security').text($('#campaign-security').val());
+    }
+    
     function updateMessagePreview()
     {
       $('#campaign-message-preview').val($('#campaign-message').val() + " " + $('#campaign-link').val());
