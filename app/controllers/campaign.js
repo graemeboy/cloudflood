@@ -128,6 +128,7 @@ var defaultVals = {
     name: '',
     message: 'Before accessing this content, the author requests that you post a short message to your social network.',
     callback: '',
+    logo: '',
     text: {
       security: 'We will never post without your permission!',
       paragraph: 'Before accessing this content, the author requests that you post a short message to your social network.',
