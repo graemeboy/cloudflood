@@ -229,7 +229,7 @@ exports.twitterCallback = function (req, res, next) {
 
 exports.postTwitter = function(req, res, next) {
     req.session.campaign = req.campaign;
-    req.session.user_message = req.body.message;
+    //req.session.user_message = req.body.message;
     twitter.getRequestToken(function(error, requestToken, requestTokenSecret, results) {
         if (error) {
             console.log("Error getting OAuth request token : " + error);
