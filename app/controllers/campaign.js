@@ -10,15 +10,12 @@ exports.create = function (req, res) {
   var camData = {};
   var error
   
-  camData.name = "hello world!";
-  /*
-if (!validator.isNull(req.body['campaign-name'])) {
+  if (!validator.isNull(req.body['campaign-name'])) {
     camData.name = req.body['campaign-name'];
   }
   else {
     error = "Please enter a name.";
   }
-*/
   console.log(req.body['campaign-link']);
   
   if (!validator.isNull(req.body['campaign-link']) && validator.isURL(req.body['campaign-link'])) {
