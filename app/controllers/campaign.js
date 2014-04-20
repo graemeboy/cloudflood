@@ -84,7 +84,7 @@ exports.create = function(req, res, next) {
       console.log("error!");
             res.writeHead(200, {
                 "Content-Type": "text/plain"
-            });
+      });
             res.end("error"); // elaborate later.
 /*
 req.flash('error', err)
@@ -106,9 +106,7 @@ console.log("success");
             req.flash('success', 'New Campaign created!');
             res.redirect('/dashboard/'+saveData._id);
         }
-        });
-    })
-  }
+    });
 }
 
 exports.dashboard = function(req, res) {  
