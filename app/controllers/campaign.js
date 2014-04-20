@@ -169,6 +169,7 @@ exports.edit = function(req, res) {
     
   res.render('dashboard/campaign', {
       title: 'Edit your campaign',
+      button: 'Edit Campaign',
       campaign: data
   })
 }
@@ -176,6 +177,7 @@ exports.edit = function(req, res) {
 exports.make = function(req, res) {
     res.render('dashboard/campaign', {
       title: 'Create a new campaign',
+      button: 'Create New Campaign',
       campaign: defaultVals
     });
 }
