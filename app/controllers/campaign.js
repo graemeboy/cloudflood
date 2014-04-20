@@ -98,16 +98,47 @@ exports.display = function(req, res, next) {
     })
 }
 
+var defaultVals = {
+    name: '',
+    message: 'Before accessing this content, the author requests that you post a short message to your social network.',
+    callback: '',
+    text: {
+      security: 'We will never post without your permission!',
+      paragraph: 'Before accessing this content, the author requests that you post a short message to your social network.',
+      heading: 'Post a Message to Receive the Product'
+    },
+    style: {},
+}
+
+var fillKeys = function (template, data) {
+  var defaultKeys = Object.keys(template);
+  for (var i = 0; i < defaultKeys.length; i++) {
+    if (data[defaultKeys[i]] !== undefined) {
+      if (data[defaultKeys[i]] instanceof Object) {
+        template[defaultKeys[i]] = fillKeys(template[defaultKeys[i]], data[defaultKeys[i]]);
+      }
+      else {
+        template[defaultKeys[i]] = data[defaultKeys[i]]
+      }
+    }
+  }
+  return template;
+}
+
 exports.edit = function(req, res, next) {
-    res.render('dashboard/campaign', {
-        title: 'Edit your campaign',
-        campaign: req.campaign
-    })
+
+  var data = fillKeys(defaultVals, req.campaign);
+    
+  res.render('dashboard/campaign', {
+      title: 'Edit your campaign',
+      campaign: data
+  })
 }
 
 exports.make = function(req, res, next) {
     res.render('dashboard/campaign', {
-      title: 'Create a new campaign'
+      title: 'Create a new campaign',
+      campaign: defaultVals
     });
 }
 
