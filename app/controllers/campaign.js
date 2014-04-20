@@ -62,6 +62,7 @@ if (validator.isURL(req.body['campaign-logo'])) {
     style.securityColor = req.body['style-color-security'] == 'undefined' ? '' : req.body['style-color-security'];
     style.backgroundColor = req.body['style-color-background'] == 'undefined' ? '' : req.body['style-color-background'];
     style.messageColor = req.body['style-color-message'] == 'undefined' ? '' : req.body['style-color-message'];
+    style.fontType = req.body['style-font'];
     camData.style = style;
     camData.message_edit = req.body["campaign-message-edit"] === 'yes' ? true : false;
     camData.link = req.body["campaign-link"];
@@ -144,7 +145,9 @@ var defaultVals = {
       paragraph: 'Before accessing this content, the author requests that you post a short message to your social network.',
       heading: 'Post a Message to Receive the Product'
     },
-    style: {},
+    style: {
+      fontType: "'Helvetica', sans-serif"
+    },
     facebook: true,
     twitter: true
     
@@ -211,7 +214,7 @@ exports.twitterCallback = function (req, res, next) {
     }
     else { 
       twitter.statuses('update', {
-        status: req.session.campaign.message
+        status: req.session.campaign.message + ' - ' + req.session.campaign.link
       },
       accessToken,
       accessTokenSecret,
