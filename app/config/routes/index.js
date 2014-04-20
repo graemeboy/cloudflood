@@ -28,13 +28,12 @@ module.exports = function (app, passport) {
   
   
 
-  router.get('/:campaignId/post-twitter', campaign.postTwitter);
+  router.get('/campaign/:campaignId/twitter', campaign.postTwitter);
   router.get('/twitter/callback/', campaign.twitterCallback);
-  //router.get('/:campaignId/write-status', campaign.writerStatus);
     
   router.param('campaignId', campaign.campaign);
   router.get('/campaign/:campaignId', campaign.display);
-  router.get('/campaign/new', campaign.create);
+  router.get('/dashboard/campaign/new', campaign.create);
   router.get('/dashboard/:campaignId', campaign.details);
   router.get('/dashboard/:campaignId', campaign.details);
   router.get('/dashboard/:campaignId/edit', campaign.edit);
