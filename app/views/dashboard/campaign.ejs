@@ -1,17 +1,40 @@
 <%= include header %>
 
+
+
 <style type="text/css">
   #post-security
   {
     color: <%= campaign.style.securityColor %>;
   }  
+  
+  .facebook-signin
+  {
+    <% if (!campaign.facebook) { %>
+      display:none;
+    <% } %>
+  }
+  .twitter-signin
+  {
+    <% if (!campaign.twitter) { %>
+      display:none;
+    <% } %>
+  }
+  #campaign-logo-preview
+  {
+    <% if (campaign.logo === undefined || campaign.logo === '') { %>
+      height:0;
+    <% } %>
+  }
 </style>
 
-<%= campaign %>
+<!-- <%= campaign %> -->
 <div id="dashboard-campaign-wrapper">
     <h1 class="campaign-create-head-main"><%= title %></h1>
     <form id="campaign-create-form" role="form" action="/process-campaign" method="post">
+    <% if (campaign.id !== undefined) { %>
     <input type="hidden" name="campaign-id" value="<%= campaign['_id'] %>" />
+    <% } %>
     <div class="col-md-6">
       
       
@@ -46,7 +69,7 @@
         
         <div class="form-group">
           <label for="campaign-heading" class="col-sm-12">Your Logo (Optional)</label>
-          <input type="text" id="campaign-logo" name="campaign-logo-url" id="campaign-logo-url">
+          <input type="text" id="campaign-logo" name="campaign-logo" id="campaign-logo" class="form-control">
         </div>
 
   
@@ -147,7 +170,7 @@
     <h4 class="campaign-create-head">Redirect Link</h4>
     <div class="form-group">
       <p>Where does the user go after sharing your message?</p>
-      <input type="text" class="form-control campaign-create-input" data-section="product" name="campaign-redirect" id="campaign-product" value="<%= campaign.product %>" placeholder="http://">
+      <input type="text" class="form-control campaign-create-input" data-section="product" name="campaign-redirect" id="campaign-product" value="<%= campaign.callback %>" placeholder="http://">
     </div> <!-- form-group -->
   </div> <!-- create-section product -->
   <div class="campaign-create-section" id="campaign-create-section-networks">
@@ -172,6 +195,7 @@
         <hr/>
         <div class="campaign-create-preview-inner">
         <div class="social-modal-container">
+        <div class="campaign-logo" id="campaign-logo-preview"></div>
   <div class="social-intro">
     <h3 id="social-intro-heading"></h3>
     <p id="social-intro-paragraph"></p>

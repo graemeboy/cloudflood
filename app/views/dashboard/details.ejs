@@ -16,12 +16,12 @@
 <p>All you need to do to embed the button into your site, is copy some of the code below, and paste it into your web page.</p>
 <h4>Embed as a button</h4>
 <pre>
-&lt;button onclick=&quot;window.open('http://localhost:3000/campaign/535349f3ac01292a33eae979','_blank','height=400,width=540,toolbar=no,fullscreen=no,location=no,resizable=no')&quot;&gt;Try it&lt;/button&gt;
+&lt;button onclick=&quot;window.open('http://localhost:3000/campaign/<%= campaign['_id'] %>','_blank','height=400,width=540,toolbar=no,fullscreen=no,location=no,resizable=no')&quot;&gt;Try it&lt;/button&gt;
 </pre>
 
 <h4>Embed as a link</h4>
 <pre>
-&lt;a href=&quot;#&quot; onclick=&quot;window.open('http://localhost:3000/campaign/535349f3ac01292a33eae979','_blank','height=400,width=540,toolbar=no,fullscreen=no,location=no,resizable=no')&quot;&gt;Try it&lt;/button&gt;
+&lt;a href=&quot;#&quot; onclick=&quot;window.open('http://localhost:3000/campaign/<%= campaign['_id'] %>','_blank','height=400,width=540,toolbar=no,fullscreen=no,location=no,resizable=no')&quot;&gt;Try it&lt;/button&gt;
 </pre>
 </div>
 <%= include footer %>

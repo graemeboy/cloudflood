@@ -31,6 +31,7 @@
 <body>
 
 <div class="social-modal-container">
+  <div class="campaign-logo"></div>
   <div class="social-intro">
     <h3 id="social-intro-heading"><%= campaign.text.heading %></h3>
     <p id="social-intro-paragraph"><%= campaign.text.paragraph %></p>
@@ -52,7 +53,7 @@
       </a>
     <% } %>
     <%if (campaign.twitter) { %>
-      <a href="/auth/<%= campaign._id %>/post-twitter" class="twitter-signin">
+      <a href="/campaign/<%= campaign._id %>/twitter" class="twitter-signin">
           <div class="twitter-icon"></div>
           <div class="twitter-signin-text">
           <span class="word-strong">Post</span>

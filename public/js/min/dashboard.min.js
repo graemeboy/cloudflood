@@ -18,10 +18,39 @@ jQuery(document).ready(function($) {
     });
     // Twitter and Facebook Listeners
     $('#campaign-create-checkbox-twitter').change(function() {
-        $('.twitter-signin').toggle();
+      if ($(this).is(":checked"))
+      {
+        $('.twitter-signin').show();
+      }
+      else
+      {
+        $('.twitter-signin').hide();
+      } 
     });
+    
+    $('#campaign-logo').keyup(function ()
+    {
+      if ($(this).val() != '')
+      {
+        $('#campaign-logo-preview').css('height', '100px');
+        $('#campaign-logo-preview').css("background-image", "url('" + $(this).val() + "')");
+      }
+      else
+      {
+        $('#campaign-logo-preview').css('height', '0');
+      }
+      
+    });
+    
     $('#campaign-create-checkbox-facebook').change(function() {
-        $('.facebook-signin').toggle();
+      if ($(this).is(":checked"))
+      {
+        $('.facebook-signin').show();
+      }
+      else
+      {
+        $('.facebook-signin').hide();
+      }
     });
     $('.campaign-create-color-picker').each(function() {
         $(this).iris({
