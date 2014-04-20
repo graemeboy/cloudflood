@@ -36,6 +36,9 @@ exports.create = function(req, res, next) {
       else {
         error = "Please enter a valid logo URL.";
       }
+    }
+    else {
+      camData.logo = '';
     } 
     
     if (error) {
@@ -51,19 +54,19 @@ exports.create = function(req, res, next) {
     text.security = req.body["campaign-security"];
     camData.text = text;
     var style = {};
-    style.headingColor = req.body['style-color-heading'];
-    style.paragraphColor = req.body['style-color-paragraph'];
-    style.securityColor = req.body['style-color-security'];
-    style.backgroundColor = req.body['style-color-background'];
-    style.messageColor = req.body['style-color-message'];
+    style.headingColor = req.body['style-color-heading'] == 'undefined' ? '' : req.body['style-color-heading'];
+    style.paragraphColor = req.body['style-color-paragraph'] == 'undefined' ? '' : req.body['style-color-paragraph'];
+    style.securityColor = req.body['style-color-security'] == 'undefined' ? '' : req.body['style-color-security'];
+    style.backgroundColor = req.body['style-color-background'] == 'undefined' ? '' : req.body['style-color-background'];;
+    style.messageColor = req.body['style-color-message'] == 'undefined' ? '' : req.body['style-color-message'];
     camData.style = style;
     camData.message_edit = req.body["campaign-message-edit"] === 'yes' ? true : false;
     camData.link = req.body["campaign-link"];
     camData.twitter = req.body["campaign-twitter"] === 'yes' ? true : false;
     camData.facebook = req.body["campaign-facebook"] === 'yes' ? true : false;
     
-        
-  if (req.body['campaign-id'] !== undefined || req.body['campaign-id'] !== '') {
+    
+  if (req.body['campaign-id'] != undefined) {
         Campaign.findOne({
         '_id': req.body['campaign-id']
     }).exec(function(err, campaign) {
@@ -75,10 +78,12 @@ exports.create = function(req, res, next) {
     })
   }
   else {
+      console.log('hello')
       var saveData = new Campaign(camData);
       saveData.user = req.user;
   } 
   
+  console.log(saveData)
   saveData.save(function(err){
     if (err) {
       console.log("error!");
@@ -156,7 +161,7 @@ var fillKeys = function (template, data) {
 
 exports.edit = function(req, res) {
 
-  var template = defaultKeys
+  var template = defaultVals;
   var data = fillKeys(template, req.campaign);
     
   res.render('dashboard/campaign', {
