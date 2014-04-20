@@ -63,21 +63,25 @@ exports.create = function(req, res, next) {
     camData.facebook = req.body["campaign-facebook"] === 'yes' ? true : false;
     
         
-  if (req.body['campaign-id'] !== '') {
+  if (req.body['campaign-id'] !== undefined || req.body['campaign-id'] !== '') {
         Campaign.findOne({
         '_id': req.body['campaign-id']
     }).exec(function(err, campaign) {
         if (err) return next(err)
-        if (!campaign) {
-          var saveData = new Campaign(camData);
-          saveData.user = req.user;
-        }
+        if (!campaign) return next(err)
         else {
           var saveData = extend(campaign, camData);
         }
-        saveData.save(function(err){
-          if (err) {
-            console.log("error!");
+    })
+  }
+  else {
+      var saveData = new Campaign(camData);
+      saveData.user = req.user;
+  } 
+  
+  saveData.save(function(err){
+    if (err) {
+      console.log("error!");
             res.writeHead(200, {
                 "Content-Type": "text/plain"
             });
