@@ -151,7 +151,7 @@ var fillKeys = function (template, data) {
   return template;
 }
 
-exports.edit = function(req, res, next) {
+exports.edit = function(req, res) {
 
   var data = fillKeys(defaultVals, req.campaign);
     
@@ -161,26 +161,26 @@ exports.edit = function(req, res, next) {
   })
 }
 
-exports.make = function(req, res, next) {
+exports.make = function(req, res) {
     res.render('dashboard/campaign', {
       title: 'Create a new campaign',
       campaign: defaultVals
     });
 }
 
-exports.details = function(req, res, next) {
+exports.details = function(req, res) {
     res.render('dashboard/details', {
         campaign: req.campaign,
         info: req.flash('success')
     })
 }
-exports.stats = function(req, res, next) {
+exports.stats = function(req, res) {
     res.render('dashboard/stats', {
         campaign: req.campaign
     })
 }
 
-exports.endpoint = function(req, res, next) {
+exports.endpoint = function(req, res) {
   res.render('campaign-end', {
       callback: req.session.campaign.callback
   })
