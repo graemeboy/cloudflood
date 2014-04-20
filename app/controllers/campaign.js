@@ -153,7 +153,8 @@ var fillKeys = function (template, data) {
 
 exports.edit = function(req, res) {
 
-  var data = fillKeys(defaultVals, req.campaign);
+  var template = defaultKeys
+  var data = fillKeys(template, req.campaign);
     
   res.render('dashboard/campaign', {
       title: 'Edit your campaign',
