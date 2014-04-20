@@ -88,9 +88,13 @@ exports.display = function(req, res, next) {
     })
 }
 exports.edit = function(req, res, next) {
-    res.render('dashboard/edit', {
+    res.render('dashboard/campaign', {
         campaign: req.campaign
     })
+}
+
+exports.make = function(req, res, next) {
+    res.render('dashboard/edit');
 }
 exports.details = function(req, res, next) {
     res.render('dashboard/details', {
