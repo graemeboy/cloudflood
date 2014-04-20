@@ -169,7 +169,9 @@ exports.stats = function(req, res, next) {
 }
 
 exports.endpoint = function(req, res, next) {
-    res.render('campaign-end')
+    res.render('campaign-end', {
+      callback: req.session.campaign.callback
+    })
 }
 
 exports.twitterCallback = function (req, res, next) {
@@ -188,9 +190,7 @@ exports.twitterCallback = function (req, res, next) {
           //req.flash('error', error);
         }
         else {
-          res.redirect('/campaign/thankyou', {
-            campaign: req.session.campaign.callback
-          });
+          res.redirect('/campaign/thankyou');
         }
       })
     }
