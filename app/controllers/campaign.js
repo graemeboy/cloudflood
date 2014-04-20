@@ -77,16 +77,24 @@ req.flash('error', err)
         //return res.redirect('/dashboard/'+campaign._id);
     })
 }
-exports.posted = function(req, res, next) {
-    //console.log(req.body);
-    console.log('posted');
-    //res.redirect(req.campaign.callback);
+
+exports.dashboard = function(req, res) {  
+  var user = req.user
+  Campaign.find({'user': user._id}).exec(funcction(err, campaigns) {
+    if (err) res.render('500');
+    res.render('/dashboard', {
+        title: 'Campaigns',
+        campaigns: campaigns,
+    })
+  })
 }
+
 exports.display = function(req, res, next) {
     res.render('campaign', {
         campaign: req.campaign
     })
 }
+
 exports.edit = function(req, res, next) {
     res.render('dashboard/campaign', {
         campaign: req.campaign
@@ -96,6 +104,7 @@ exports.edit = function(req, res, next) {
 exports.make = function(req, res, next) {
     res.render('dashboard/campaign');
 }
+
 exports.details = function(req, res, next) {
     res.render('dashboard/details', {
         campaign: req.campaign
@@ -169,6 +178,9 @@ exports.update = function(req, res, next) {
         //res.render(('campaign/' + campaign._id)
     })
 }
+
+exports.
+
 exports.campaign = function(req, res, next, id) {
     Campaign.findOne({
         '_id': id
