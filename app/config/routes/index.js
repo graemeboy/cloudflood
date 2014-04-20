@@ -26,7 +26,7 @@ module.exports = function (app, passport) {
   
   router.post('/process-campaign', campaign.create);
   
-  router.get('/auth/facebook',
+  router.get('/campaign/:campaignId/facebook',
     passport.authenticate('facebook', {
       scope: [ 'email', 'publish_actions'],
       failureRedirect: '/process-login'
@@ -35,17 +35,19 @@ module.exports = function (app, passport) {
   router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
       failureRedirect: '/process-login'
-    }), user.authCallback)
+    }), campaign.posted)
     
-  router.get('/auth/twitter',
+  router.get('/auth/:campaignId/twitter',
     passport.authenticate('twitter', {
-      failureRedirect: '/process-login'
+      failureRedirect: '/twitter_error',
+      campaign: campaign
     }), user.signin)
     
   router.get('/auth/twitter/callback',
     passport.authenticate('twitter', {
-      failureRedirect: '/process-login'
-    }), user.authCallback)
+      campaign: campaign,
+      failureRedirect: '/twitter_error'
+    }), campaign.posted)
     
   router.param('campaignId', campaign.campaign);
   router.get('/campaign/:campaignId', campaign.display);

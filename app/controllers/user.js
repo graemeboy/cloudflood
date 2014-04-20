@@ -8,9 +8,7 @@ var login = function (req, res) {
   res.redirect(redirectTo)
 }
 
-exports.signin = function (req, res) {}
-
-exports.authCallback = login
+exports.signin = function (req, res) {console.log('in user signin')}
 
 /**
  * Show sign up form

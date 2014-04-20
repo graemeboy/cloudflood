@@ -35,6 +35,8 @@
     "passport-local": "^1.0.0",
     "validator": "^3.10.0",
     "passport-facebook": "^1.0.3",
-    "passport-twitter": "^1.0.2"
+    "passport-twitter": "^1.0.2",
+    "oauth": "^0.9.11",
+    "node-twitter-api": "^1.2.0"
   }
 }
