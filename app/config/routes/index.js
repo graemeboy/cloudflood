@@ -20,14 +20,6 @@ module.exports = function (app, passport) {
   router.post('/process-signup', user.create);
   router.get('/dashboard', campaign.dashboard);
   
-  /*
-function (req, res) {
-    res.render('dashboard', {
-      error: req.flash('error')
-    });
-*/
-  });
-  
   router.post('/process-campaign', campaign.create);
   
   
@@ -54,9 +46,7 @@ function (req, res) {
   // post callback
   // add data to stats model
   // return client callback
-  
-  router.get('/campaign/:campaignId/process-post', campaign.posted);
-  
+    
   
   router.get('/', index.index);
   

@@ -80,9 +80,9 @@ req.flash('error', err)
 
 exports.dashboard = function(req, res) {  
   var user = req.user
-  Campaign.find({'user': user._id}).exec(funcction(err, campaigns) {
+  Campaign.find({'user': user._id}).exec(function (err, campaigns) {
     if (err) res.render('500');
-    res.render('/dashboard', {
+    res.render('dashboard', {
         title: 'Campaigns',
         campaigns: campaigns,
     })
@@ -178,8 +178,6 @@ exports.update = function(req, res, next) {
         //res.render(('campaign/' + campaign._id)
     })
 }
-
-exports.
 
 exports.campaign = function(req, res, next, id) {
     Campaign.findOne({
