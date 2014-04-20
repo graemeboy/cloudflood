@@ -9,7 +9,6 @@
 <body>
 <%= campaign %>
 
-
 <div class="social-modal-container">
   <div class="social-intro">
     <h3 id="social-intro-heading">Post a Message to Receive the Product</h3>
@@ -20,7 +19,8 @@
       <textarea class="share-text" maxlength="140"><%= campaign.message %> <%= campaign.link %></textarea>
     </div>
     <div style="clear:both"></div>
-    <div class="share-send">          
+    <div class="share-send">
+    <%if (campaign.facebook) { %>
       <a href="auth/facebook" class="facebook-signin">
           <div class="facebook-icon"></div>
           <div class="facebook-signin-text">
@@ -29,6 +29,8 @@
           <span class="word-strong">Facebook</span>  
         </div>
       </a>
+    <% } %>
+    <%if (campaign.twitter) { %>
       <a href="auth/twitter" class="twitter-signin">
           <div class="twitter-icon"></div>
           <div class="twitter-signin-text">
@@ -37,9 +39,11 @@
           <span class="word-strong">Twitter</span>  
         </div>
       </a>
+    <% } %>
+      
     </div>
     <div style="clear:both"></div>
-    <div class="post-secure">We'll never post without your permission!</div>
+    <div class="post-secure" <%if (!campaign.twitter || !campaign.twitter) { %> style="text-align:left;" <% } %> >We'll never post without your permission!</div>
   </div>
 </div>
 </body>
