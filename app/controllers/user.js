@@ -15,24 +15,25 @@ exports.signin = function (req, res) {console.log('in user signin')}
  */
 
 exports.create = function (req, res, next) {
-  var user = new User(req.body);
   
   if(!validator.isEmail(req.body.email)) {
-    error = "Please enter a valid email address.";
+    var error = "Please enter a valid email address.";
   }
   else if(!validator.isLength(req.body.password, 8, 20)) {
-    error = "Password must be between 8-20 characters long.";
+    var error = "Password must be between 8-20 characters long.";
   }
-  else if (!validator.equals(req.body.password, req.body.passwordconf)) {
-    error = "Passwords do not match.";
+  else if (!validator.equals(req.body.password, req.body.passwordConf)) {
+    var error = "Passwords do not match.";
   }
   
   if (error) {
     req.flash('error', error);
     return res.redirect('/');
   }
-  
-  user.roles = ['authenticated', 'client'];
+  else {
+    var user = new User(req.body);
+    
+    user.roles = ['authenticated'];
   user.save(function(err) {
       if (err) {
           return res.redirect('/', {
@@ -44,6 +45,7 @@ exports.create = function (req, res, next) {
           return res.redirect('/');
       });
   });
+  }
 }
 
 /**
