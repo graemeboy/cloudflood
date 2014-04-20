@@ -10,6 +10,8 @@ var login = function (req, res) {
 
 exports.signin = function (req, res) {}
 
+exports.authCallback = login
+
 /**
  * Show sign up form
  */
@@ -17,37 +19,36 @@ exports.signin = function (req, res) {}
 exports.create = function (req, res, next) {
   var user = new User(req.body);
   
-  user.provider = 'local';
-
-    // because we set our user.provider to local our models/user.js validation will always be true
-    
-    
-    /*
-req.assert('email', 'You must enter a valid email address').isEmail();
-    req.assert('password', 'Password must be between 8-20 characters long').len(8, 20);
-    req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
-
-    var errors = req.validationErrors();
-    if (errors) {
-        return res.status(400).send(errors);
-    }
-*/
-
-    // Hard coded for now. Will address this with the user permissions system in v0.3.5
-    user.roles = ['authenticated'];
-    user.save(function(err) {
-        if (err) {
-            return res.redirect('/', {
-              
-              //error: utils.errors(err.errors),
-              user: user,
-            })
-        }
-        req.logIn(user, function(err) {
-            if (err) return next(err)
-            return res.redirect('/');
-        });
-    });
+  if(!validator.isEmail(req.body.email)) {
+    error = "Please enter a valid email address.";
+  }
+  else if(!validator.isLength(req.body.password, 8, 20)) {
+    error = "Password must be between 8-20 characters long.";
+  }
+  else if (!validator.equals(req.body.password, req.body.passwordconf)) {
+    error = "Passwords do not match.";
+  }
+  
+  if (error) {
+    return res.redirect('/', {
+      error: error
+    })
+  }
+  
+  user.roles = ['authenticated', 'client'];
+  user.save(function(err) {
+      if (err) {
+          return res.redirect('/', {
+            
+            //error: utils.errors(err.errors),
+            user: user,
+          })
+      }
+      req.logIn(user, function(err) {
+          if (err) return next(err)
+          return res.redirect('/');
+      });
+  });
 }
 
 /**
@@ -77,9 +78,9 @@ exports.show = function (req, res) {
   })
 }
 
-exports.user = function (req, res, next, email) {
+exports.user = function (req, res, next, id) {
   User
-    .findOne({ 'email' : email })
+    .findOne({ 'id' : email })
     .exec(function (err, user) {
       if (err) return next(err)
       if (!user) return next(new Error('Failed to load User ' + id))
