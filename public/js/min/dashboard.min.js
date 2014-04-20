@@ -79,6 +79,11 @@ jQuery(document).ready(function($) {
     function updateMessagePreview() {
         $('#campaign-message-preview').val($('#campaign-message').val() + " " + $('#campaign-link').val());
     } // updateMessagePreview()
+    
+    $('#campaign-font').change(function ()
+    {
+        $('.social-modal-container').css('font-family', $(this).find(":selected").val());
+    });
 /*
     $('#campaign-create-form').submit(function(e) {
         e.preventDefault();

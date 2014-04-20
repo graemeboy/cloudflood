@@ -1,14 +1,24 @@
 <%= include header %>
+
+<style type="text/css">
+  #post-security
+  {
+    color: <%= campaign.style.securityColor %>;
+  }  
+</style>
+
+<%= campaign %>
 <div id="dashboard-campaign-wrapper">
-    <h3 class="campaign-create-head-main">Create a Campaign</h3>
+    <h1 class="campaign-create-head-main"><%= title %></h1>
     <form id="campaign-create-form" role="form" action="/process-campaign" method="post">
+    <input type="hidden" name="campaign-id" value="<%= campaign['_id'] %>" />
     <div class="col-md-6">
       
       
       <div class="campaign-create-section campaign-create-section-active" id="campaign-create-section-name">
         <div class="form-group">
           <label for="campaign-name">Campaign Name</label>
-          <input type="text" class="form-control campaign-create-input" data-section="name" name="campaign-name" id="campaign-name" placeholder="My campaign">
+          <input type="text" class="form-control campaign-create-input" data-section="name" name="campaign-name" id="campaign-name" value="<%= campaign.name %>" placeholder="My campaign">
         </div>
       </div>
       <div class="campaign-create-section" id="campaign-create-section-message">
@@ -16,11 +26,11 @@
         <div class="form-group">
           <label for="">Tweet or Status to be Shared</label>
           <p>Write a message here that you want to your audience to share</p>
-          <textarea type="text" name="campaign-message" class="form-control campaign-create-input" id="campaign-message" placeholder="Your tweet / status" data-section="message"></textarea>
+          <textarea type="text" name="campaign-message" class="form-control campaign-create-input" id="campaign-message" placeholder="Your tweet / status" data-section="message"><%= campaign.message %></textarea>
           
           <div class="checkbox">
            <label>
-              <input name="campaign-message-edit" value="yes" class="campaign-create-input" data-section="message" type="checkbox"> Allow the user to edit this message
+              <input name="campaign-message-edit" <% if (campaign.message_edit !== undefined && campaign.message_edit) { %>  checked="checked" <% } %> value="yes" class="campaign-create-input" data-section="message" type="checkbox"> Allow the user to edit this message
             </label>
           </div>
         </div>
@@ -36,8 +46,7 @@
         
         <div class="form-group">
           <label for="campaign-heading" class="col-sm-12">Your Logo (Optional)</label>
-          <input type="file" id="campaign-logo" name="campaign-logo">
-            <p class="help-block">Upload a .png, .jpg, or .gif file</p>
+          <input type="text" id="campaign-logo" name="campaign-logo-url" id="campaign-logo-url">
         </div>
 
   
@@ -45,7 +54,7 @@
         <div class="form-group col-sm-12">
           <label for="campaign-heading" class="col-sm-12">Interface Heading</label>
           <div class="col-sm-8">
-          <input type="text" class="form-control campaign-create-input" data-section="design" name="campaign-heading" id="campaign-heading" value="Post a Message to Receive the Product">
+          <input type="text" class="form-control campaign-create-input" data-section="design" name="campaign-heading" id="campaign-heading" value="<%= campaign.text.heading %>">
           </div> <!-- sm-8 -->
           <div class="col-sm-4">
             
@@ -53,7 +62,7 @@
             <div class="campaign-create-picker-preview" id="social-intro-heading-preview"></div>
               <a class="campaign-create-picker-btn btn btn-default" data-target="campaign-create-color-picker-heading" href="#">
                 <span id="campaign-create-social-intro-heading-btn-text" data-target="campaign-create-color-picker-heading" style="font-size:12px;">Select Color</span></a>
-              <input type="text" id="campaign-create-color-picker-heading" name="style-color-heading" class='form-control campaign-create-color-picker' data-target="social-intro-heading" value="#333333" />
+              <input type="text" id="campaign-create-color-picker-heading" name="style-color-heading" class='form-control campaign-create-color-picker' data-target="social-intro-heading" value="<%= campaign.style.headingColor %>" />
             </div> <!-- picker-select -->
           </div> <!-- sm-4 -->
           <div class="clearfix"></div>
@@ -62,7 +71,7 @@
             <label for="campaign-heading" class="col-sm-12">Interface Body</label>
             <p>What should your users know before they post this message?</p>
             <div class="col-sm-8">
-            <textarea class="form-control campaign-create-input" data-section="design" name="campaign-paragraph" id="campaign-paragraph">Before accessing this content, the author requests that you post a short message to your social network.</textarea>
+            <textarea class="form-control campaign-create-input" data-section="design" name="campaign-paragraph" id="campaign-paragraph"><%= campaign.text.paragraph %></textarea>
             </div>
             <div class="col-sm-4">
             
@@ -70,14 +79,14 @@
             <div class="campaign-create-picker-preview" id="social-intro-paragraph-preview"></div>
               <a class="campaign-create-picker-btn btn btn-default" data-target="campaign-create-color-picker-paragraph" href="#">
                 <span id="campaign-create-social-intro-paragraph-btn-text" data-target="campaign-create-color-picker-paragraph" style="font-size:12px;">Select Color</span></a>
-              <input type="text" id="campaign-create-color-picker-paragraph" name="style-color-paragraph" class='form-control campaign-create-color-picker' data-target="social-intro-paragraph" value="#333333" />
+              <input type="text" id="campaign-create-color-picker-paragraph" name="style-color-paragraph" class='form-control campaign-create-color-picker' data-target="social-intro-paragraph" value="<%= campaign.style.paragraphColor %>" />
             </div> <!-- picker-select -->
           </div> <!-- sm-4 -->
         </div>
         <div class="form-group col-sm-12">
           <label for="campaign-security" class="col-sm-12">Security Promise</label>
           <div class="col-sm-8">
-          <input type="text" class="form-control campaign-create-input" data-section="design" name="campaign-security" id="campaign-security" value="We'll never post without your permission!">
+          <input type="text" class="form-control campaign-create-input" data-section="design" name="campaign-security" id="campaign-security" value="<%= campaign.text.security %>">
           </div>
           <div class="col-sm-4">
             
@@ -85,35 +94,43 @@
             <div class="campaign-create-picker-preview" id="post-security-preview"></div>
               <a class="campaign-create-picker-btn btn btn-default" data-target="campaign-create-color-picker-security" href="#">
                 <span id="campaign-create-social-intro-security-btn-text" data-target="campaign-create-color-picker-security" style="font-size:12px;">Select Color</span></a>
-              <input type="text" id="campaign-create-color-picker-security" name="style-color-security" class='form-control campaign-create-color-picker' data-target="post-security" value="#333333" />
+              <input type="text" id="campaign-create-color-picker-security" name="style-color-security" class='form-control campaign-create-color-picker' data-target="post-security" value="<%= campaign.style.securityColor %>" />
             </div> <!-- picker-select -->
           </div> <!-- sm-4 -->
         </div>
         <div class="clearfix"></div>
         <div class="col-sm-4">
-          <label for="campaign-background-color" class="col-sm-12">Background Color</label>
+          <label for="campaign-background-color" class="col-sm-12">Bg Color</label>
           <div class="campaign-create-picker-select">
             <div class="campaign-create-picker-preview" style="background-color:#ffffff" id="social-intro-background-preview"></div>
               <a class="campaign-create-picker-btn btn btn-default" data-target="campaign-create-color-picker-background" href="#">
                 <span id="campaign-create-social-intro-background-btn-text" data-target="campaign-create-color-picker-background" style="font-size:12px;">Select Color</span></a>
-              <input type="text" id="campaign-create-color-picker-background" name="style-color-background" class='form-control campaign-create-color-picker' data-target="social-intro-background" value="#ffffff" />
+              <input type="text" id="campaign-create-color-picker-background" name="style-color-background" class='form-control campaign-create-color-picker' data-target="social-intro-background" value="<%= campaign.style.backgroundColor %>" />
             </div> <!-- picker-select -->
             
         </div> <!-- sm-4 -->
         
         <div class="col-sm-4">
-          <label for="campaign-share-text-color" class="col-sm-12">Message Text Color</label>
+          <label for="campaign-share-text-color" class="col-sm-12">Message Color</label>
           <div class="campaign-create-picker-select">
             <div class="campaign-create-picker-preview" id="share-text-preview"></div>
               <a class="campaign-create-picker-btn btn btn-default" data-target="campaign-create-color-picker-share-text" href="#">
                 <span id="campaign-create-social-intro-share-text-btn-text" data-target="campaign-create-color-picker-share-text" style="font-size:12px;">Select Color</span></a>
-              <input type="text" id="campaign-create-color-picker-share-text" name="style-color-message" class='form-control campaign-create-color-picker' data-target="share-text" value="#fff" />
+              <input type="text" id="campaign-create-color-picker-share-text" name="style-color-message" class='form-control campaign-create-color-picker' data-target="share-text" value="<%= campaign.style.messageColor %>" />
             </div> <!-- picker-select -->
             
         </div> <!-- sm-4 -->
         
         <div class="col-sm-4">
           <label for="campaign-font" class="col-sm-12">Font Type</label>
+          <select id="campaign-font" name="style-font" class="form-control">
+            <option value="'Helvetica',sans-serif">Helvetica</option>
+            <option value="'Helvetica Neue', helvetica, sans-serif">Helvetica Neue</option>
+            <option value="'Lucida Grande',sans-serif">Lucida Grande</option>
+            <option value="'Verdana',sans-serif">Verdana</option>
+            <option value="'Times New Roman',serif">Times New Roman</option>
+            <option value="'Georgia',serif">Georgia</option>
+          </select>
         </div>
         <div class="clearfix"></div>
       </div>
@@ -130,19 +147,19 @@
     <h4 class="campaign-create-head">Redirect Link</h4>
     <div class="form-group">
       <p>Where does the user go after sharing your message?</p>
-      <input type="text" class="form-control campaign-create-input" data-section="product" name="campaign-redirect" id="campaign-product" placeholder="http://">
+      <input type="text" class="form-control campaign-create-input" data-section="product" name="campaign-redirect" id="campaign-product" value="<%= campaign.product %>" placeholder="http://">
     </div> <!-- form-group -->
   </div> <!-- create-section product -->
   <div class="campaign-create-section" id="campaign-create-section-networks">
     <h4 class="campaign-create-head">Social Networks</h4>
       <div class="checkbox">
           <label>
-            <input name="campaign-twitter" value="yes" class="campaign-create-input" id="campaign-create-checkbox-twitter" data-section="networks" type="checkbox" checked="checked"> Allow Posting on Twitter
+            <input name="campaign-twitter" value="yes" class="campaign-create-input" id="campaign-create-checkbox-twitter" data-section="networks" type="checkbox" <% if (campaign.twitter !== undefined && campaign.twitter) { %>  checked="checked" <% } %> > Allow Posting on Twitter
           </label>
         </div>
         <div class="checkbox">
           <label>
-            <input name="campaign-facebook" value="yes" class="campaign-create-input" id="campaign-create-checkbox-facebook" data-section="networks" type="checkbox" checked="checked"> Allow Posting on Facebook
+            <input name="campaign-facebook" value="yes" class="campaign-create-input" id="campaign-create-checkbox-facebook" data-section="networks" type="checkbox" <% if (campaign.facebook !== undefined && campaign.facebook) { %>  checked="checked" <% } %> > Allow Posting on Facebook
           </label>
         </div>
 </div>
