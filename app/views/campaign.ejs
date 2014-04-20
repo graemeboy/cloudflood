@@ -42,7 +42,7 @@
     <div style="clear:both"></div>
     <div class="share-send">
     <%if (campaign.facebook) { %>
-      <a href="/auth/facebook" class="facebook-signin">
+      <a href="/auth/facebook?id=" class="facebook-signin">
           <div class="facebook-icon"></div>
           <div class="facebook-signin-text">
           <span class="word-strong">Post</span>
@@ -52,7 +52,7 @@
       </a>
     <% } %>
     <%if (campaign.twitter) { %>
-      <a href="/auth/<%= campaign._id %>/twitter" class="twitter-signin">
+      <a href="/auth/twitter?id=<%= campaign._id %>" class="twitter-signin">
           <div class="twitter-icon"></div>
           <div class="twitter-signin-text">
           <span class="word-strong">Post</span>
