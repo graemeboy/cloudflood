@@ -1,5 +1,6 @@
 <%= include header %>
-<div class="alert alert-success">Your campaign was successfully saved</div>
+<%= info %>
+<% if (info.text !== undefined) { %> <div class="alert alert-success">Your campaign was successfully saved</div> <% } %>
 <h1 class="details-name">My first campaign</h1>
 <div class="container">
 <h4><a href="/dashboard/.id./edit">Edit Campaign</a></h4>

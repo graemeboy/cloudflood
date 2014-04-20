@@ -1,4 +1,10 @@
 <%= include header %>
+
+<!-- <%= campaigns %> -->
+
+
+
+
   <style type="text/css">
     .dashboard-campaign-name
     {
@@ -22,13 +28,18 @@
     <h1>Your Campaigns</h1>
     
     <div class="container">
+    
+    <% for(var i=0; i<campaigns.length; i++) {%>
       <div class="dashboard-campaign">
         <h3>
-          <a class="dashboard-campaign-name" href="/dashboard/123">My first campaign</a>
+          <a class="dashboard-campaign-name" href="/dashboard/<%= campaigns[i]['_id'] %>"><%= campaigns[i].name %></a>
         </h3>
-        <div class="dashboard-campaign-redirect">http://www.google.com/</div>
+        <div class="dashboard-campaign-redirect"><%= campaigns[i].callback %></div>
       </div>
-    </div>
+<% } %>
+  </div>
+
+      
     
 <!--     <div>You have not created any campaigns yet.</div> -->
 

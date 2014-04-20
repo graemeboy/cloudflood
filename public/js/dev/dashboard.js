@@ -79,16 +79,18 @@ jQuery(document).ready(function($) {
     function updateMessagePreview() {
         $('#campaign-message-preview').val($('#campaign-message').val() + " " + $('#campaign-link').val());
     } // updateMessagePreview()
+/*
     $('#campaign-create-form').submit(function(e) {
         e.preventDefault();
         var data = $(this).serialize();
         $.ajax({
             type: "post",
-            url: "/process-campaign",
+            url: "",
             data: data
         }) // ajax post
         .done(function(msg) {
-            alert("Data Saved: " + msg);
+            console.log("Data Saved: " + msg);
         }); // ajax done
-    }); // campaign-create submit
+
+    }); // campaign-create submit*/
 }); // jquery document ready
