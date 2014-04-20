@@ -84,7 +84,7 @@ jQuery(document).ready(function($) {
         var data = $(this).serialize();
         $.ajax({
             type: "post",
-            url: "process-campaign",
+            url: "/process-campaign",
             data: data
         }) // ajax post
         .done(function(msg) {
