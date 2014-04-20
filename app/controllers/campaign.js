@@ -8,15 +8,20 @@ var mongoose = require('mongoose')
 
 exports.create = function (req, res) {
   var camData = {};
+  var error
   
-  if (!validator.isNull(req.body['campaign-name'])) {
+  camData.name = "hello world!";
+  /*
+if (!validator.isNull(req.body['campaign-name'])) {
     camData.name = req.body['campaign-name'];
   }
   else {
     error = "Please enter a name.";
   }
+*/
+  console.log(req.body['campaign-link']);
   
-  if (!validator.isNull(req.body['campaign-link']) && validator.isUrl(req.body['campaign-link'])) {
+  if (!validator.isNull(req.body['campaign-link']) && validator.isURL(req.body['campaign-link'])) {
     camData.callback = req.body['campaign-link'];
   }
   else {
@@ -24,6 +29,7 @@ exports.create = function (req, res) {
   }
   
   if (error) {
+    console.log(error);
     req.flash('error', error);
     return res.redirect ('/dashboard');
   }
@@ -34,20 +40,31 @@ exports.create = function (req, res) {
   camData.twitter = req.body["campaign-twitter"] === 'yes' ? true : false;
   camData.facebook = req.body["campaign-facebook"] === 'yes' ? true : false;
   
-  
   var campaign = new Campaign(camData);
   campaign.user = req.user;
 
   campaign.save(function(err) {
     if (err) {
-      req.flash('error', err)
+      console.log("error!");
+      res.writeHead(200, {"Content-Type": "text/plain"});
+      res.end("error"); // elaborate later.
+      /*
+req.flash('error', err)
       return res.redirect('/dashboard', {
         error: req.flash('error'),
         campaign: campaign
       });
-    }
+*/
+    } // if error
+    // Success:
+    else {
+    console.log("success");
+    res.writeHead(200, {"Content-Type": "text/plain"});
+    res.end(campaign._id.toString()); // return the ID number of the campaign
     
-    req.flash('success', 'New Campaign created!');
+    //req.flash('success', 'New Campaign created!');
+    
+    }
     
     // set up campaign redirect
     //return res.redirect('/dashboard/'+campaign._id);
@@ -113,7 +130,7 @@ exports.update = function (req, res, next) {
   
 exports.campaign = function (req, res, next, id) {
   Campaign
-    .findOne({ 'id' : id })
+    .findOne({ '_id' : id })
     .exec(function (err, campaign) {
       if (err) return next(err)
       if (!campaign) return next(new Error('Failed to load campaign ' + id))
