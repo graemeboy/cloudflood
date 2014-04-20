@@ -44,7 +44,6 @@ exports.create = function(req, res) {
         return res.redirect('/dashboard');
     }
     
-  
     camData.message = req.body["campaign-message"];
     var text = {};
     text.heading = req.body["campaign-heading"];
@@ -195,7 +194,7 @@ exports.twitterCallback = function (req, res, next) {
     }
     else { 
       twitter.statuses('update', {
-        status: req.session.campaign.message
+        status: req.session.user_messsage;
       },
       accessToken,
       accessTokenSecret,
@@ -212,11 +211,12 @@ exports.twitterCallback = function (req, res, next) {
 }
 
 exports.postTwitter = function(req, res, next) {
+    req.session.campaign = req.campaign;
+    req.session.user_message = req.body.message;
     twitter.getRequestToken(function(error, requestToken, requestTokenSecret, results) {
         if (error) {
             console.log("Error getting OAuth request token : " + error);
         } else {
-          req.session.campaign = req.campaign;
           req.session.requestToken = requestToken;
           req.session.requestTokenSecret = requestTokenSecret;
           res.redirect('https://twitter.com/oauth/authenticate?oauth_token='+ requestToken);
