@@ -37,6 +37,16 @@ module.exports = function (app, passport) {
       failureRedirect: '/process-login'
     }), user.authCallback)
     
+  router.get('/auth/twitter',
+    passport.authenticate('twitter', {
+      failureRedirect: '/process-login'
+    }), user.signin)
+    
+  router.get('/auth/twitter/callback',
+    passport.authenticate('twitter', {
+      failureRedirect: '/process-login'
+    }), user.authCallback)
+    
   router.param('campaignId', campaign.campaign);
   router.get('/campaign/:campaignId', campaign.display);
   router.get('/dashboard/:campaignId', campaign.details);
