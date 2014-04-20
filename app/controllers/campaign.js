@@ -12,7 +12,9 @@ var mongoose = require('mongoose'),
 /**
  * Show sign up form
  */
+ 
 exports.create = function(req, res) {
+
     var camData = {};
     var error
     if (!validator.isNull(req.body['campaign-name'])) {
@@ -47,10 +49,22 @@ exports.create = function(req, res) {
     camData.link = req.body["campaign-link"];
     camData.twitter = req.body["campaign-twitter"] === 'yes' ? true : false;
     camData.facebook = req.body["campaign-facebook"] === 'yes' ? true : false;
-    var campaign = new Campaign(camData);
-    campaign.user = req.user;
-    campaign.save(function(err) {
-        if (err) {
+    
+        
+  if (req.body['campaign-id'] !== '') {
+        Campaign.findOne({
+        '_id': req.body['campaign-id']
+    }).exec(function(err, campaign) {
+        if (err) return next(err)
+        if (!campaign) {
+          var saveData = new Campaign(camData);
+          saveData.user = req.user;
+        }
+        else {
+          var saveData = extend(campaign, camData);
+        }
+        saveData.save(function(err){
+          if (err) {
             console.log("error!");
             res.writeHead(200, {
                 "Content-Type": "text/plain"
@@ -74,11 +88,11 @@ console.log("success");
             res.end(campaign._id.toString()); 
 */// return the ID number of the campaign
             req.flash('success', 'New Campaign created!');
-            res.redirect('/dashboard/'+campaign._id);
+            res.redirect('/dashboard/'+saveData._id);
         }
-        // set up campaign redirect
-        //
+        });
     })
+  }
 }
 
 exports.dashboard = function(req, res) {  
