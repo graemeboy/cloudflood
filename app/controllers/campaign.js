@@ -22,16 +22,29 @@ exports.create = function(req, res) {
     } else {
         error = "Please enter a name.";
     }
+    
     if (!validator.isNull(req.body['campaign-redirect']) && validator.isURL(req.body['campaign-redirect'])) {
         camData.callback = req.body['campaign-redirect'];
     } else {
         error = "Please enter a valid callback URL.";
     }
+    
+    if (!validator.isNull(req.body['campaign-logo'])) {
+      if (validator.isURL(req.body['campaign-logo'])) {
+        camData.logo = req.body['campaign-logo'];
+      }
+      else {
+        error = "Please enter a valid logo URL.";
+      }
+    } 
+    
     if (error) {
         console.log(error);
         req.flash('error', error);
         return res.redirect('/dashboard');
     }
+    
+  
     camData.message = req.body["campaign-message"];
     var text = {};
     text.heading = req.body["campaign-heading"];

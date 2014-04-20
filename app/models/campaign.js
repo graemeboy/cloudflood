@@ -13,6 +13,7 @@ var CampaignSchema = new Schema({
     message_edit: Boolean,
     text: {},
     style: {},
+    logo: String,
     link: String,
     callback: String,
     user: {type : Schema.ObjectId, ref : 'User'},
