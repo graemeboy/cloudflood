@@ -5,105 +5,12 @@
     <title>Cloud:flood Members Area</title>
 
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <link href="stylesheets/min/campaign.min.css" rel="stylesheet" >
+    <link href="stylesheets/min/dashboard.min.css" rel="stylesheet" >
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
-    <script src="js/iris.min.js"></script>
-<style type="text/css">
-  #member-nav
-  {
-    background-color: #ffffff;
-  }
-  td.campaigns-head-actions
-  {
-    width: 100px;
-  }
-  .campaign-action
-  {
-   
-  }
-  .campaign-submit-wrapper 
-  {
-    text-align: center;
-  }
-  footer
-  {
-    padding: 10px;
-  }
-
-  .campaign-create-head-main
-  {
-    margin-bottom: 20px;
-  }
-  .campaign-create-section
-  {
-    padding: 8px 0 8px 15px;
-    border-left: 2px solid #eee;
-  }
-  .campaign-create-section-active
-  {
-    border-left-color: #b0b0ff;
-  }
-  .campaign-submit-wrapper
-  {
-    margin-top: 20px;
-  }
-  .campaign-create-preview-inner
-  {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-  }
-  .campaign-create-picker-preview
-  {
-    display:inline-block;
-    background-color: #333;
-    margin-right: -3px; 
-    position: relative;
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: 400;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    background-image: none;
-    border: 1px solid transparent;
-    white-space: nowrap;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    border-radius: 4px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border-color: #ccc;
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
-    float:left;
-    height:31px;
-    width:31px;
-  }
-  .campaign-create-picker-select
-  {
-    display:inline-block;
-    width:200px;
-  }
-  .campaign-create-color-picker
-  {
-    display:none;
-    width:70px;
-  }
-  #campaign-paragraph
-  {
-    height: 85px;
-  }
-  .preview-fixed
-  {
-    position:fixed;
-    top:0;
-    left:0;
-  }
-</style>
+    <script src="js/min/iris.min.js"></script>
+    <script type="text/javascript" src="js/min/dashboard.min.js"></script>
 
 </head>
 
@@ -317,147 +224,13 @@
         <p>Once your users click on the button, they will see the popup previewed below.</p>
         <hr/>
         <div class="campaign-create-preview-inner">
-        <style type="text/css">
-.social-modal-container
-{
-  width: 500px;
-  padding: 10px 20px;
-  font-family: 'Helvetica Neue', helvetica, sans-serif;
-}
-.share-quote-mark
-{
-  color: #fff;
-  font-size: 36px;
-  text-align: center;
-  width: 36px;
-  height: 36px;
-  margin: 0 auto;
-  margin-top:-12px;
-  background-color: #999;
-  line-height: 36px;
-  border-radius: 36px;
-  font-family: 'Times New Roman';
-}
-.share-text
-{
-  border: none;
-  margin-top:10px;
-  width:100%;
-  height: 65px;
-  padding: 5px 15px;
-  margin-top: 0px;
-  margin-bottom: 20px;
-  font-family: Georgia,Cambria,"Times New Roman",Times,serif;
-  letter-spacing: .01rem;
-  font-weight: 400;
-  font-style: italic;
-  font-size: 14px;
-  border-left: 3px solid #57ad68;
-  padding-left: 20px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  overflow: hidden;
-  resize: none;
-}
-.share-text:focus
-{
-  outline: none;
-}
-.facebook-icon, .twitter-icon
-{
-  width: 48px;
-  height: 48px;
-  display: inline-block;
-  overflow: hidden;
-  position: absolute;
-  left: 5px;
-  top: 0;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-.facebook-icon
-{
-  background-image: url('img/facebook-48.png');
-}
-.twitter-icon
-{
-  background-image: url('img/twitter-48.png');
-}
-.facebook-signin
-{
-  border: 1px solid #32456F;
-  background: #678bbf; /* Old browsers */
-  background: -moz-linear-gradient(top, #678bbf 0%, #39548c 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#678bbf), color-stop(100%,#39548c)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #678bbf 0%,#39548c 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #678bbf 0%,#39548c 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #678bbf 0%,#39548c 100%); /* IE10+ */
-  background: linear-gradient(to bottom, #678bbf 0%,#39548c 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#678bbf', endColorstr='#39548c',GradientType=0 ); /* IE6-9 */
-}
-.twitter-signin
-{
-  border: 1px solid #32456F;
-  background-color: #1c95d0;
-  background-image: -moz-linear-gradient(top, #2daddc, #0271bf);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2daddc), to(#0271bf));
-  background-image: -webkit-linear-gradient(top, #2daddc, #0271bf);
-  background-image: -o-linear-gradient(top, #2daddc, #0271bf);
-  background-image: linear-gradient(to bottom, #2daddc, #0271bf);
-  background-repeat: repeat-x;
-  border-color: #0271bf #0271bf #014473;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff2daddc', endColorstr='#ff0271bf', GradientType=0);
-}
-.facebook-signin, .twitter-signin
-{
-  height: 46px;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  width: 215px;
-  float:left;
-  margin-right: 15px;
-  position: relative
-}
-
-.facebook-signin-text, .twitter-signin-text
-{
-  color: #ffffff;
-  padding: 0;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
-  font-weight: 100;
-  font-size: 16px;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.6);
-  display: inline-block;
-  position: absolute;
-  top: 15px;
-  left: 60px;
-  line-height: 1;
-}
-.word-strong
-{
-  font-weight: 400;
-}
-.word-italic
-{
-  font-style: italic;
-}
-.post-secure
-{
-  font-style: italic;
-  text-align: center;
-  margin-top:5px;
-  font-size: 13px;
-}</style>
-<div class="social-modal-container">
+        <div class="social-modal-container">
   <div class="social-intro">
     <h3 id="social-intro-heading"></h3>
     <p id="social-intro-paragraph"></p>
   </div>
   <div class="share-container">
     <div class="share-wrapper">
-      <!-- <div class="share-quote-mark">"</div> -->
       <textarea class="share-text" id="campaign-message-preview" maxlength="140">This is my awesome product description. http://www.graemeboy.com</textarea>
     </div>
     <div style="clear:both"></div>
@@ -495,139 +268,12 @@
     </div>
   </div>
   </form>
-  
   </div>
-  
   <div id="campaign-stats">
     <h3>Campaign Stats</h3>
   </div>
 </div>
 
-<script type="text/javascript">
-  jQuery(document).ready(function ($)
-  {
-    var previewOffset = $('#campaign-create-section-preview').offset();
-    $('#campaign-create-section-preview').css('left', previewOffset.left);
-    
-    $(window).scroll(function(){
-      console.log($(this).scrollTop() + ' vs ' + previewOffset.top);
-      if ($(this).scrollTop() > previewOffset.top) 
-      {
-          $('#campaign-create-section-preview').addClass('preview-fixed');
-      }  // if
-      else 
-      {
-          $('#campaign-create-section-preview').removeClass('preview-fixed');
-      } // else
-    }); // window scroll
-    
-    
-    var pickerTarget;
-    updateMessagePreview(); // on load, update the preview
-    updateInterfacePreview();
-    $('.campaign-create-picker-btn, .campaign-create-picker-btn span').click(function (e)
-    {
-      e.preventDefault();
-
-      $('#' + $(this).attr('data-target')).iris('show');
-    });
-    
-    // Twitter and Facebook Listeners
-    $('#campaign-create-checkbox-twitter').change(function ()
-    {
-      $('.twitter-signin').toggle();
-    });
-    $('#campaign-create-checkbox-facebook').change(function ()
-    {
-      $('.facebook-signin').toggle();
-    });
-    
-    $('.campaign-create-color-picker').each(function ()
-    {
-     $(this).iris({
-       change: function (event, ui) {
-        pickerTarget = $(this).attr('data-target');
-          if (pickerTarget === 'social-intro-background')
-          {
-            $('.social-modal-container, #campaign-message-preview').css('background-color', ui.color.toString());
-          } // if
-          else if (pickerTarget === 'share-text')
-          {
-            $('.share-text').css('color', ui.color.toString());
-          }
-          else
-          {
-            $('#' + pickerTarget).css('color', ui.color.toString());   
-          } // else
-         
-         $('#' + pickerTarget + '-preview').css('background-color', ui.color.toString());
-         $('#campaign-create-' + $(this).attr('data-target') + '-btn-text').text(ui.color.toString())
-       } // change
-     }); // .iris
-    }); // . each
-    // Hide iris on document click
-    listenHideIris();
-     
-     function listenHideIris()
-     {
-       $('#campaign-create').click(function(e) {
-  			if (!$(e.target).is('input[type="submit"], a') ) 
-  			{
-  				if (!$(e.target).is(".campaign-create-color-picker, .campaign-create-picker-btn span, .iris-picker, .iris-picker-inner, input[type='checkbox'], label")) {
-  					$('.campaign-create-color-picker').iris('hide');
-  					$('.campaign-create-color-picker').hide();
-  					return false;
-  				} // if
-  				$('.campaign-create-color-picker').click(function() {
-  					$('.campaign-create-color-picker').iris('hide');
-  					$(this).iris('show');
-  					return false;
-  				}); // .color-picker click
-  			} // if
-  		}); // document.click
-     }
-    $('.campaign-create-input').focus(function ()
-    {
-      $('.campaign-create-section').removeClass('campaign-create-section-active');
-      $('#campaign-create-section-' + $(this).attr('data-section')).addClass('campaign-create-section-active');
-    });
-    
-    $('#campaign-message, #campaign-link').keyup(function ()
-    {
-      updateMessagePreview();
-    }); // #campaign-link keyup
-    
-    $('#campaign-heading, #campaign-paragraph, #campaign-security').keyup(function ()
-    {
-      updateInterfacePreview();  
-    }); // #campaign-heading keyup
-    
-    function updateInterfacePreview ()
-    {
-      $('#social-intro-heading').text($('#campaign-heading').val());
-      $('#social-intro-paragraph').text($('#campaign-paragraph').val());
-      $('#post-security').text($('#campaign-security').val());
-    }
-    
-    function updateMessagePreview()
-    {
-      $('#campaign-message-preview').val($('#campaign-message').val() + " " + $('#campaign-link').val());
-    } // updateMessagePreview()
-    $('#campaign-create-form').submit(function (e)
-    {
-      e.preventDefault();
-      var data = $(this).serialize();
-      $.ajax({
-        type: "post",
-        url: "process-campaign",
-        data: data
-      }) // ajax post
-      .done(function( msg ) {
-        alert( "Data Saved: " + msg );
-      }); // ajax done
-    }); // campaign-create submit
-  }); // jquery document ready
-</script>
 <footer>
   <div class="container container-fluid">
     <p>This is the footer</p>
