@@ -2,11 +2,14 @@
 
 <html>
 <head>
-    <title>{{ campaign-title }}</title>
+    <title><%= campaign.name %></title>
     <link href="/stylesheets/min/campaign.min.css" rel="stylesheet">
 </head>
 
 <body>
+<%= campaign %>
+
+
 <div class="social-modal-container">
   <div class="social-intro">
     <h3 id="social-intro-heading">Post a Message to Receive the Product</h3>
@@ -14,7 +17,7 @@
   </div>
   <div class="share-container">
     <div class="share-wrapper">
-      <textarea class="share-text" maxlength="140">This is my awesome product description. http://www.graemeboy.com</textarea>
+      <textarea class="share-text" maxlength="140"><%= campaign.message %> <%= campaign.link %></textarea>
     </div>
     <div style="clear:both"></div>
     <div class="share-send">          
