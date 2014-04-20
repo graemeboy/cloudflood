@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
  * Show sign up form
  */
  
-exports.create = function(req, res) {
+exports.create = function(req, res, next) {
 
     var camData = {};
     var error
