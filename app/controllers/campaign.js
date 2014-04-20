@@ -183,6 +183,10 @@ exports.update = function(req, res, next) {
     })
 }
 
+exports.settings = function(req, res, next) {
+  req.render('dashboard/account');
+}
+
 exports.campaign = function(req, res, next, id) {
     Campaign.findOne({
         '_id': id

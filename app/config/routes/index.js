@@ -29,6 +29,7 @@ module.exports = function (app, passport) {
     
   router.param('campaignId', campaign.campaign);
   router.get('/campaign/:campaignId', campaign.display);
+  router.get('/dashboard/settings', campaign.settings);
   router.get('/dashboard/campaign/new', campaign.make);
   router.get('/dashboard/:campaignId', campaign.details);
   router.get('/dashboard/:campaignId/edit', campaign.edit);
