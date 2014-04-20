@@ -52,7 +52,7 @@
       </a>
     <% } %>
     <%if (campaign.twitter) { %>
-      <a href="/auth/twitter?id=<%= campaign._id %>" class="twitter-signin">
+      <a href="/auth/<%= campaign._id %>/post-twitter" class="twitter-signin">
           <div class="twitter-icon"></div>
           <div class="twitter-signin-text">
           <span class="word-strong">Post</span>
