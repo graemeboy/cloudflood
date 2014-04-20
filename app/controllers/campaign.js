@@ -169,12 +169,10 @@ exports.stats = function(req, res, next) {
 }
 
 exports.endpoint = function(req, res, next) {
-  res.render('campaign-end');
-    /*
-res.render('campaign-end', {
+  res.render('campaign-end', {
       callback: req.session.campaign.callback
     })
-*/
+
 }
 
 exports.twitterCallback = function (req, res, next) {
