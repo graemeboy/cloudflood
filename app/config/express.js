@@ -59,6 +59,8 @@ module.exports = function (app, passport, db) {
         collection : config.sessionCollection
       })
     }));
+    
+    app.use(require('connect-flash')());
 
     // need to add store!
 
