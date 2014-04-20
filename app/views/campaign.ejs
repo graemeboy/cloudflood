@@ -4,6 +4,28 @@
 <head>
     <title><%= campaign.name %></title>
     <link href="/stylesheets/min/campaign.min.css" rel="stylesheet">
+    <style type="text/css">
+      body
+      {
+        background-color: <%= campaign.style.backgroundColor %>;
+      }
+      #social-intro-heading
+      {
+        color: <%= campaign.style.headingColor %>;
+      }
+      #social-intro-paragraph
+      {
+        color: <%= campaign.style.paragraphColor %>;
+      }
+      .share-text
+      {
+        color: <%= campaign.style.messageColor %>;
+      }
+      .post-secure 
+      {
+        color: <%= campaign.style.securityColor %>;
+      }
+    </style>
 </head>
 
 <body>
@@ -11,17 +33,17 @@
 
 <div class="social-modal-container">
   <div class="social-intro">
-    <h3 id="social-intro-heading">Post a Message to Receive the Product</h3>
-    <p id="social-intro-paragraph">Before accessing this content, the author requests that you post a short message to your social network.</p>
+    <h3 id="social-intro-heading"><%= campaign.text.heading %></h3>
+    <p id="social-intro-paragraph"><%= campaign.text.paragraph %></p>
   </div>
   <div class="share-container">
     <div class="share-wrapper">
-      <textarea class="share-text" maxlength="140"><%= campaign.message %> <%= campaign.link %></textarea>
+      <textarea class="share-text" <%if (!campaign.message_edit) { %> disabled="disabled" <% } %> maxlength="140"><%= campaign.message %> <%= campaign.link %></textarea>
     </div>
     <div style="clear:both"></div>
     <div class="share-send">
     <%if (campaign.facebook) { %>
-      <a href="auth/facebook" class="facebook-signin">
+      <a href="/auth/facebook" class="facebook-signin">
           <div class="facebook-icon"></div>
           <div class="facebook-signin-text">
           <span class="word-strong">Post</span>
@@ -31,7 +53,7 @@
       </a>
     <% } %>
     <%if (campaign.twitter) { %>
-      <a href="auth/twitter" class="twitter-signin">
+      <a href="/auth/twitter" class="twitter-signin">
           <div class="twitter-icon"></div>
           <div class="twitter-signin-text">
           <span class="word-strong">Post</span>
@@ -43,7 +65,9 @@
       
     </div>
     <div style="clear:both"></div>
-    <div class="post-secure" <%if (!campaign.twitter || !campaign.twitter) { %> style="text-align:left;" <% } %> >We'll never post without your permission!</div>
+    <div class="post-secure" <%if (!campaign.twitter || !campaign.twitter) { %> style="text-align:left;" <% } %> >
+      <%= campaign.text.security %>
+    </div>
   </div>
 </div>
 </body>
