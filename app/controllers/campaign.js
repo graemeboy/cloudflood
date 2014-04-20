@@ -66,15 +66,18 @@ req.flash('error', err)
         } // if error
         // Success:
         else {
-            console.log("success");
+            /*
+console.log("success");
             res.writeHead(200, {
                 "Content-Type": "text/plain"
             });
-            res.end(campaign._id.toString()); // return the ID number of the campaign
-            //req.flash('success', 'New Campaign created!');
+            res.end(campaign._id.toString()); 
+*/// return the ID number of the campaign
+            req.flash('success', 'New Campaign created!');
+            return res.redirect('/dashboard/'+campaign._id);
         }
         // set up campaign redirect
-        //return res.redirect('/dashboard/'+campaign._id);
+        //
     })
 }
 
@@ -84,7 +87,7 @@ exports.dashboard = function(req, res) {
     if (err) res.render('500');
     res.render('dashboard', {
         title: 'Campaigns',
-        campaigns: campaigns,
+        campaigns: campaigns
     })
   })
 }
@@ -107,7 +110,8 @@ exports.make = function(req, res, next) {
 
 exports.details = function(req, res, next) {
     res.render('dashboard/details', {
-        campaign: req.campaign
+        campaign: req.campaign,
+        info: req.flash('success')
     })
 }
 exports.stats = function(req, res, next) {
