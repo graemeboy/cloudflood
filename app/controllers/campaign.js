@@ -58,6 +58,59 @@ exports.posted = function(req, res, next) {
   res.redirect(req.campaign.callback);
 }
 
+exports.display = function(req, res, next) {
+  res.render('campaign', {
+    campaign: req.campaign
+  })
+}
+
+exports.edit = function(req, res, next) {
+  res.render('dashboard/edit', {
+    campaign: req.campaign
+  })
+}
+
+exports.details = function (req, res, next) {
+  res.render('dashboard/details', {
+    campaign: req.campaign
+  })
+}
+
+exports.stats = function (req, res, next) {
+  res.render('dashboard/stats', {
+    campaign: req.campaign
+  })
+}
+
+exports.destroy = function (req, res, next) {
+  var campaign = req.campaign
+  campaign.remove(function(err) {
+    if (err) req.flash('error', err); 
+    req.flash('info', 'Deleted successfully.')
+    return res.redirect('/dashboard');
+  })
+}
+
+exports.update = function (req, res, next) {
+  var campaign = req.campaign, 
+  campaign = extend(campaign, req.body);
+  
+  campaign.save(function(err) {
+    if (err) {
+      req.flash('error', err);
+      // redirect to campaign edit view.
+      return res.redirect(('campaign/' + campaign._id + '/edit'), {
+        //send errors and campaign
+      })
+    }
+    
+    //execute save function
+    req.flash('success', 'Campaign saved.');
+    //render campaign view
+    //res.render(('campaign/' + campaign._id)
+  })
+}
+  
 exports.campaign = function (req, res, next, id) {
   Campaign
     .findOne({ 'id' : id })

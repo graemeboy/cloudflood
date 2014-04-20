@@ -26,21 +26,26 @@ module.exports = function (app, passport) {
   
   router.post('/process-campaign', campaign.create);
   
-  app.get('/auth/facebook',
+  router.get('/auth/facebook',
     passport.authenticate('facebook', {
       scope: [ 'email', 'publish_actions'],
       failureRedirect: '/process-login'
     }), user.signin)
     
-  app.get('/auth/facebook/callback',
+  router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
       failureRedirect: '/process-login'
     }), user.authCallback)
     
+  router.param('campaignId', campaign.campaign);
+  router.get('/:campaignId', campaign.display);
+  router.get('/dashboard/:campaignId', campaign.details);
+  router.get('/dashboard/:campaignId/edit', campaign.edit);
+  router.get('/dashboard/:campaignId/stats', campaign.stats);
+  router.put('/dashboard/:campaignId', campaign.update);
+  router.delete('/dashboard/:campaignId', campaign.destroy);
   
   
-  // app.param('campaignId', campaign.campaign)
-  // router.get('/campaign/:campaignId', campaign.show);
   // function to generate code block for user to put on their page
   
   // user hits post
@@ -50,7 +55,7 @@ module.exports = function (app, passport) {
   // add data to stats model
   // return client callback
   
-  //router.get('/campaign/:campaignId/process-post', campaign.posted);
+  router.get('/campaign/:campaignId/process-post', campaign.posted);
   
   
   router.get('/', index.index);
