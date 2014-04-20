@@ -30,12 +30,15 @@ exports.create = function(req, res, next) {
     }
     
     if (!validator.isNull(req.body['campaign-logo'])) {
-      if (validator.isURL(req.body['campaign-logo'])) {
+      camData.logo = req.body['campaign-logo'];
+      /*
+if (validator.isURL(req.body['campaign-logo'])) {
         camData.logo = req.body['campaign-logo'];
       }
       else {
         error = "Please enter a valid logo URL.";
       }
+*/
     }
     else {
       camData.logo = '';
@@ -133,7 +136,7 @@ exports.display = function(req, res, next) {
 
 var defaultVals = {
     name: '',
-    message: 'Before accessing this content, the author requests that you post a short message to your social network.',
+    message: 'Check out this site!',
     callback: '',
     logo: '',
     text: {
