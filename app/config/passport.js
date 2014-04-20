@@ -7,25 +7,16 @@ var mongoose = require('mongoose')
   
 module.exports = function (passport, config) {
 
-  var twitter = new twitterAPI({
-    consumerKey: config.twitter.clientID,
-    consumerSecret: config.twitter.clientSecret,
-    callback: config.twitter.callbackURL
-  });
-
-
   // serialize sessions
   passport.serializeUser(function(user, done) {
-    done(null, user)
+    done(null, user.id)
   })
 
-  passport.deserializeUser(function(user, done) {
-    done(null, user)
-    /*
-User.findOne({ _id: id }, function (err, user) {
+  passport.deserializeUser(function(id, done) {
+    User.findOne({ _id: id }, function (err, user) {
       done(err, user)
     })
-*/
+
   })
   
   passport.use(new LocalStrategy({
@@ -53,43 +44,4 @@ User.findOne({ _id: id }, function (err, user) {
             });
         }
     ));
-    
-    passport.use(new TwitterStrategy({
-      consumerKey: config.twitter.clientID,
-      consumerSecret: config.twitter.clientSecret,
-      callbackURL: config.twitter.callbackURL
-    },
-    function(token, tokenSecret, profile, done) {
-      console.log('authenticated with twitter!');
-      
-      twitter.statuses("update", {
-        status: "Hello world!"
-      },
-      token,
-      tokenSecret,
-      function(error, data, response) {
-        if (error) {
-            console.log(error);
-        } 
-        else {
-            console.log(data);
-        }
-      });
-      //console.log(campaign);
-     return done(null, {});
-    }
-  ));
-  
-  passport.use(new FacebookStrategy({
-      clientID: config.facebook.clientID,
-      clientSecret: config.facebook.clientSecret,
-      callbackURL: config.facebook.callbackURL
-    },
-    function(accessToken, refreshToken, profile, done) {
-      
-      console.log(accessToken);
-      
-      
-      return done(err);
-    }
-  ));}
+}
