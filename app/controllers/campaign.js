@@ -145,6 +145,9 @@ var defaultVals = {
       heading: 'Post a Message to Receive the Product'
     },
     style: {},
+    facebook: true,
+    twitter: true
+    
 }
 
 var fillKeys = function (template, data) {
