@@ -19,7 +19,9 @@ module.exports = function (app, passport) {
   }), user.session);
   router.post('/process-signup', user.create);
   router.get('/dashboard', function (req, res) {
-    res.render('dashboard');
+    res.render('dashboard', {
+      error: req.flash('error')
+    });
   });
   
   router.post('/process-campaign', campaign.create);
@@ -37,8 +39,9 @@ module.exports = function (app, passport) {
     
   
   
-  //app.param('campaignId', campaign.campaign)
-  //router.get('/campaign/:campaignId', campaign.show);
+  // app.param('campaignId', campaign.campaign)
+  // router.get('/campaign/:campaignId', campaign.show);
+  // function to generate code block for user to put on their page
   
   // user hits post
   // authenticate user

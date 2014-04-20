@@ -9,6 +9,6 @@ exports.index = function(req, res)
 
   res.render('index', { 
   	title: "Welcome to CloudFlood - Let your users pay with tweets",
-  	messages: req.flash('login')
+  	error: req.flash('error')
   });
 };

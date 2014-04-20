@@ -24,9 +24,8 @@ exports.create = function (req, res) {
   }
   
   if (error) {
-    return res.redirect ('dashboard', {
-      error: error
-    });
+    req.flash('error', error);
+    return res.redirect ('/dashboard');
   }
   
   camData.message = req.body["campaign-message"];
@@ -41,23 +40,15 @@ exports.create = function (req, res) {
 
   campaign.save(function(err) {
     if (err) {
-      req.flash("errors");
-      /*
-console.log(err);
-      res.render('dashboard', {
-        campaign: campaign,
-        //error: utils.errors(err.errors || err)
+      req.flash('error', err)
+      return res.redirect('/dashboard', {
+        error: req.flash('error'),
+        campaign: campaign
       });
-*/
     }
     
-    //req.flash('New Campaign created!');
+    req.flash('success', 'New Campaign created!');
     
-    // Campaign saving was successful. Return ID.
-    res.writeHead(200, {"Content-Type": "text/plain"});
-    res.end(campaign._id.toString());
-  
-    console.log(campaign._id);
     // set up campaign redirect
     //return res.redirect('/dashboard/'+campaign._id);
     })

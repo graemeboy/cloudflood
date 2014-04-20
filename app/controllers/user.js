@@ -30,17 +30,14 @@ exports.create = function (req, res, next) {
   }
   
   if (error) {
-    return res.redirect('/', {
-      error: error
-    })
+    req.flash('error', error);
+    return res.redirect('/');
   }
   
   user.roles = ['authenticated', 'client'];
   user.save(function(err) {
       if (err) {
           return res.redirect('/', {
-            
-            //error: utils.errors(err.errors),
             user: user,
           })
       }
@@ -57,7 +54,7 @@ exports.create = function (req, res, next) {
 
 exports.logout = function (req, res) {
   req.logout()
-  res.redirect('/')
+  return res.redirect('/')
 }
 
 /**

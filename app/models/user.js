@@ -52,8 +52,7 @@ UserSchema.path('hashed_password').validate(function(hashed_password) {
  * Pre-save hook
  */
 UserSchema.pre('save', function(next) {
-    if (!this.isNew) {console.log('found an old user'); return next();}
-
+    if (!this.isNew) return next();
     if (!validatePresenceOf(this.password) && !this.provider)
         next(new Error('Invalid password'));
     else
