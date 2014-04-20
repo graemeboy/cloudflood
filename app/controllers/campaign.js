@@ -173,6 +173,7 @@ exports.endpoint = function(req, res, next) {
 }
 
 exports.twitterCallback = function (req, res, next) {
+  res.redirect('/campaign/thankyou');
   twitter.getAccessToken(req.session.requestToken, req.session.requestTokenSecret, req.query.oauth_verifier, function(error, accessToken, accessTokenSecret, results) {
     if (error) {
       req.flash('error', error);
@@ -188,7 +189,6 @@ exports.twitterCallback = function (req, res, next) {
           //req.flash('error', error);
         }
         else {
-          return res.redirect('/campaign/thankyou');
         }
       })
     }
