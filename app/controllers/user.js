@@ -19,8 +19,8 @@ exports.create = function (req, res, next) {
   if(!validator.isEmail(req.body.email)) {
     var error = "Please enter a valid email address.";
   }
-  else if(!validator.isLength(req.body.password, 8, 20)) {
-    var error = "Password must be between 8-20 characters long.";
+  else if(!validator.isLength(req.body.password, 5, 20)) {
+    var error = "Password must be between 5-20 characters long.";
   }
   else if (!validator.equals(req.body.password, req.body.passwordConf)) {
     var error = "Passwords do not match.";
