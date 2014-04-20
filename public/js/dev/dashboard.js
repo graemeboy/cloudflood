@@ -44,7 +44,7 @@ jQuery(document).ready(function($) {
     listenHideIris();
 
     function listenHideIris() {
-        $('#campaign-create').click(function(e) {
+        $('#dashboard-campaign-wrapper').click(function(e) {
             if (!$(e.target).is('input[type="submit"], a')) {
                 if (!$(e.target).is(".campaign-create-color-picker, .campaign-create-picker-btn span, .iris-picker, .iris-picker-inner, input[type='checkbox'], label")) {
                     $('.campaign-create-color-picker').iris('hide');
