@@ -15,11 +15,9 @@ exports.create = function (req, res) {
   }
   else {
     error = "Please enter a name.";
-  }
-  console.log(req.body['campaign-link']);
-  
-  if (!validator.isNull(req.body['campaign-link']) && validator.isURL(req.body['campaign-link'])) {
-    camData.callback = req.body['campaign-link'];
+  }  
+  if (!validator.isNull(req.body['campaign-redirect']) && validator.isURL(req.body['campaign-redirect'])) {
+    camData.callback = req.body['campaign-redirect'];
   }
   else {
     error = "Please enter a valid callback URL.";
@@ -31,7 +29,23 @@ exports.create = function (req, res) {
     return res.redirect ('/dashboard');
   }
   
+  
   camData.message = req.body["campaign-message"];
+  
+  var text = {};
+  text.heading = req.body["campaign-heading"];
+  text.paragraph = req.body["campaign-paragraph"];
+  text.security = req.body["campaign-security"];
+  camData.text = text;
+  
+  var style = {};
+  style.headingColor = req.body['style-color-heading'];
+  style.paragraphColor = req.body['style-color-paragraph'];
+  style.securityColor = req.body['style-color-security'];
+  style.backgroundColor = req.body['style-color-background'];
+  style.messageColor = req.body['style-color-message'];
+  camData.style = style;
+  
   camData.message_edit = req.body["campaign-message-edit"] === 'yes' ? true : false;
   camData.link = req.body["campaign-link"];
   camData.twitter = req.body["campaign-twitter"] === 'yes' ? true : false;

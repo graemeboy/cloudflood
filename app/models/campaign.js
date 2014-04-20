@@ -11,6 +11,8 @@ var CampaignSchema = new Schema({
     name: String,
     message: String,
     message_edit: Boolean,
+    text: {},
+    style: {},
     link: String,
     callback: String,
     user: {type : Schema.ObjectId, ref : 'User'},
