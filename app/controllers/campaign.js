@@ -211,7 +211,7 @@ exports.twitterCallback = function (req, res, next) {
     }
     else { 
       twitter.statuses('update', {
-        status: req.session.user_messsage
+        status: req.session.campaign.message
       },
       accessToken,
       accessTokenSecret,
