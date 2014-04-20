@@ -183,12 +183,12 @@ exports.twitterCallback = function (req, res, next) {
       },
       accessToken,
       accessTokenSecret,
-      function(error, data, response) {
+      function(error, data, res) {
         if (error) {
-          req.flash('error', error);
+          //req.flash('error', error);
         }
         else {
-          req.redirect('/campaign/thankyou');
+          res.redirect('/campaign/thankyou');
         }
       })
     }
