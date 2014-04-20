@@ -18,10 +18,14 @@ module.exports = function (app, passport) {
     failureFlash: 'Invalid email or password.'
   }), user.session);
   router.post('/process-signup', user.create);
-  router.get('/dashboard', function (req, res) {
+  router.get('/dashboard', campaign.dashboard);
+  
+  /*
+function (req, res) {
     res.render('dashboard', {
       error: req.flash('error')
     });
+*/
   });
   
   router.post('/process-campaign', campaign.create);
