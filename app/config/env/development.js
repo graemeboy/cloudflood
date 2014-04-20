@@ -4,13 +4,13 @@ module.exports = {
         name: 'Cloudflood'
     },
     facebook: {
-        clientID: '749205201786873',
-        clientSecret: 'a6f724998cc542a5b677f1e3df0efd33',
+        clientID: '520330778071280',
+        clientSecret: 'e682110f33483dc77e6e1eeb0a1a62f2',
         callbackURL: 'http://localhost:3000/auth/facebook/callback'
     },
     twitter: {
-        clientID: 'CONSUMER_KEY',
-        clientSecret: 'CONSUMER_SECRET',
+        clientID: 'dN4Rw8oF8XS7IPAQVq4XDMnzz',
+        clientSecret: 'YOFFp1y42fe2Txlzeq3VYGQlU7pMxFxzxlfhZi4KUhxWpAGlAS',
         callbackURL: 'http://localhost:3000/auth/twitter/callback'
     },
     github: {

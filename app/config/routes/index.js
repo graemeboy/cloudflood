@@ -19,10 +19,38 @@ module.exports = function (app, passport) {
   }), user.session);
   router.post('/process-signup', user.create);
   router.get('/dashboard', function (req, res) {
-    res.render('dashboard');
+    res.render('dashboard', {
+      error: req.flash('error')
+    });
   });
   
-  router.post('/dashboard/create', campaign.create)
+  router.post('/process-campaign', campaign.create);
+  
+  app.get('/auth/facebook',
+    passport.authenticate('facebook', {
+      scope: [ 'email', 'publish_actions'],
+      failureRedirect: '/process-login'
+    }), user.signin)
+    
+  app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+      failureRedirect: '/process-login'
+    }), user.authCallback)
+    
+  
+  
+  // app.param('campaignId', campaign.campaign)
+  // router.get('/campaign/:campaignId', campaign.show);
+  // function to generate code block for user to put on their page
+  
+  // user hits post
+  // authenticate user
+  // post to feed
+  // post callback
+  // add data to stats model
+  // return client callback
+  
+  //router.get('/campaign/:campaignId/process-post', campaign.posted);
   
   
   router.get('/', index.index);
