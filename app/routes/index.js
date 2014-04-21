@@ -20,8 +20,8 @@ module.exports = function (passport) {
   router.post('/process-signup', user.create);
   
 
-  router.use('/dashboard', require('./campaign')());
-  router.use('/campaign', require('./campaign')());
+  router.use('/dashboard', require('./dashboard'));
+  router.use('/campaign', require('./campaign'));
     
   // should change to '/dashboard/process-campaign' on the frontend later
   router.post('/process-campaign', campaign.create);
