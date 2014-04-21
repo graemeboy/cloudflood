@@ -31,7 +31,7 @@
 <!-- <%= campaign %> -->
 <div id="dashboard-campaign-wrapper">
     <h1 class="campaign-create-head-main"><%= title %></h1>
-    <form id="campaign-create-form" role="form" action="/process-campaign" method="post">
+    <form id="campaign-create-form" role="form" action="/dashboard/process-campaign" method="post">
     <% if (campaign.id !== undefined) { %>
     <input type="hidden" name="campaign-id" value="<%= campaign['_id'] %>" />
     <% } %>

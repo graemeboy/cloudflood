@@ -1,7 +1,6 @@
 var express = require('express')
   , campaign = require('../controllers/campaign');
 
-
 var router = express.Router();
 
 router.param('campaignId', campaign.campaign);

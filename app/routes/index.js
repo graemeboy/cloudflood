@@ -5,7 +5,6 @@ var express = require('express');
  */
 
 var user = require('../controllers/user')
-  , campaign = require('../controllers/campaign')
   , index = require('../controllers/');
   //, auth = require('./middlewares/authorization')
 
@@ -22,11 +21,6 @@ module.exports = function (passport) {
 
   router.use('/dashboard', require('./dashboard'));
   router.use('/campaign', require('./campaign'));
-    
-  // should change to '/dashboard/process-campaign' on the frontend later
-  router.post('/process-campaign', campaign.create);
-    
-  
   router.get('/', index.index);
   
   return router;
