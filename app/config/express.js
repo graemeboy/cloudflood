@@ -74,7 +74,7 @@ module.exports = function (app, passport, db) {
     app.use(helpers(config.app.name));
     
     // connect router   
-   app.use(require(config.root + '/config/routes')(app, passport)); 
+   app.use(require(config.root + '/routes')(passport)); 
     
     // adds CSRF support
 /*

@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
         var twitter = new twitterAPI({
         consumerKey: config.twitter.clientID,
         consumerSecret: config.twitter.clientSecret,
-        callback: 'http://localhost:3000/twitter/callback/'
+        callback: 'http://localhost:3000/campaign/twitter/callback/'
     });
 /**
  * Show sign up form
@@ -44,8 +44,7 @@ if (validator.isURL(req.body['campaign-logo'])) {
       camData.logo = '';
     } 
     
-    if (error) {
-        console.log(error);
+    if (error) { 
         req.flash('error', error);
         return res.redirect('/dashboard');
     }
@@ -82,12 +81,12 @@ if (validator.isURL(req.body['campaign-logo'])) {
     })
   }
   else {
-      console.log('hello')
+      
       var saveData = new Campaign(camData);
       saveData.user = req.user;
   } 
   
-  console.log(saveData)
+  
   saveData.save(function(err){
     if (err) {
       console.log("error!");

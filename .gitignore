@@ -1,4 +1,4 @@
 # ignore any mac cruft
 .DS_Store
-./node_modules/
+node_modules/
 npm-debug.log
