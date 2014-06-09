@@ -1,6 +1,6 @@
 module.exports = {
-    db: 'mongodb://localhost/cloudflood-dev',
-    //db: 'mongodb://clflood:clflood@kahana.mongohq.com:10009/app26183816',
+    //db: 'mongodb://localhost/cloudflood-dev',
+    db: 'mongodb://clflood:clflood@kahana.mongohq.com:10009/app26183816',
     app: {
         name: 'Cloudflood'
     },
