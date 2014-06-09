@@ -26,6 +26,8 @@ module.exports = function (passport) {
 
     router.get('/try', index.beta);
     router.get('/', index.index);
+    
+    router.get('/vip', index.vip);
 
     return router;
-}
+} // exports
