@@ -5,6 +5,8 @@ exports.index = function(req, res)
   // If true, then redirect to the user's store page.
   if (req.user) {
     res.redirect("/dashboard");
+  } else {
+   res.redirect("/try");   
   }
 
   res.render('index', { 
