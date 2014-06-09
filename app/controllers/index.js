@@ -9,7 +9,7 @@ exports.index = function(req, res)
    //res.redirect("/try");   
   }
 
-  res.render('beta-try', { 
+  res.render('prelaunch/beta-try', { 
   	title: "Welcome to CloudFlood - Let your users pay with tweets",
   	error: req.flash('error')
   });
