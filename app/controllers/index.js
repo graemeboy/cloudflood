@@ -6,10 +6,10 @@ exports.index = function(req, res)
   if (req.user) {
     res.redirect("/dashboard");
   } else {
-   res.redirect("/try");   
+   //res.redirect("/try");   
   }
 
-  res.render('index', { 
+  res.render('beta-try', { 
   	title: "Welcome to CloudFlood - Let your users pay with tweets",
   	error: req.flash('error')
   });
