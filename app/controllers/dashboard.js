@@ -78,20 +78,27 @@ var defaultVals = {
 
 /*
  * Fill in values for a template array, using keys from defaults.
+ * Postcondition: values in data array are unchanged.
+ * 
+ * template can be from defaultVals
+ * data can be data from the campaign
  */
 var fillKeys = function (template, data) {
-    
+    // Create an array to keep all of the default keys
   var defaultKeys = Object.keys(template);
-  for (var i = 0; i < defaultKeys.length; i++) {
-    if (data[defaultKeys[i]] !== undefined) {
-      if (data[defaultKeys[i]] instanceof Object) {
-        template[defaultKeys[i]] = fillKeys(template[defaultKeys[i]], data[defaultKeys[i]]);
-      } // if
-      else {
-        template[defaultKeys[i]] = data[defaultKeys[i]]
-      } // else
-    } // if
-  } // for
+    // For each of these keys
+    for (var i = 0; i < defaultKeys.length; i++) {
+        if (data[defaultKeys[i]] !== undefined) {
+            // if it is itself a JSON object
+          if (data[defaultKeys[i]] instanceof Object) {
+              // recurse on the object
+              template[defaultKeys[i]] = 
+                fillKeys(template[defaultKeys[i]], data[defaultKeys[i]]);
+          } else {
+            template[defaultKeys[i]] = data[defaultKeys[i]];
+          } // else
+        } // if
+    } // for
     console.log("About to return template");
     console.log("default values are:");
     console.log(defaultVals);
@@ -107,11 +114,11 @@ exports.edit = function(req, res) {
     console.log("Editing a campaign");
     
     // Begin by getting an array of the default values
-    // Then, fill our data array by replacing those defaults
-    // with data submitted by the user.
     console.log("setting template to defaults. Defaults are:");
     console.log(defaultVals);
-    var template = defaultVals;
+    // copy across, don't reference defaultVals
+    var template = cloneObject(defaultVals);
+    // Fill all keys present in defaults with data from the campaign
     var data = fillKeys(template, req.campaign);
     
     console.log("using campaign's template values:");
@@ -123,6 +130,16 @@ exports.edit = function(req, res) {
       campaign: data
     }) // .render
 } // .edit
+
+function cloneObject (obj) {
+ if (obj instanceof Object) {
+    var copy = {};
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = cloneObject(obj[attr]);
+    }
+    return copy;
+ }   
+}
 
 /*
  * Render a page for showing a single campaign's statistics
@@ -143,7 +160,7 @@ exports.destroy = function(req, res, next) {
         req.flash('info', 'Deleted successfully.')
         return res.redirect('/dashboard');
     })
-}
+} // .destroy
 
 /*
  * Save a new campaign to database from POST data.
@@ -156,13 +173,13 @@ exports.create = function(req, res, next) {
         camData.name = req.body['campaign-name'];
     } else {
         error = "Please enter a name.";
-    }
+    } // else
     
     if (!validator.isNull(req.body['campaign-redirect']) && validator.isURL(req.body['campaign-redirect'])) {
         camData.callback = req.body['campaign-redirect'];
     } else {
         error = "Please enter a valid callback URL.";
-    }
+    } // else
     
     if (!validator.isNull(req.body['campaign-logo'])) {
       camData.logo = req.body['campaign-logo'];
@@ -174,15 +191,14 @@ if (validator.isURL(req.body['campaign-logo'])) {
         error = "Please enter a valid logo URL.";
       }
 */
-    }
-    else {
+    } else {
       camData.logo = '';
-    } 
+    } // else
     
     if (error) { 
         req.flash('error', error);
         return res.redirect('/dashboard');
-    }
+    } // if
     
     camData.message = req.body["campaign-message"];
     var text = {};
@@ -218,12 +234,11 @@ if (validator.isURL(req.body['campaign-logo'])) {
           var saveData = extend(campaign, camData);
         }
     })
-  }
-  else {
+  } else {
       
       var saveData = new Campaign(camData);
       saveData.user = req.user;
-  } 
+  } // else
   
   
   saveData.save(function(err){
@@ -252,8 +267,8 @@ console.log("success");
 */// return the ID number of the campaign
             req.flash('success', 'New Campaign created!');
             res.redirect('/dashboard/'+saveData._id);
-        }
-    });
-}
+        } // elsev
+    }); // .save
+} 
 
 
