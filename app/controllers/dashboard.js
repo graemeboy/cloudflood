@@ -13,37 +13,46 @@ exports.index = function(req, res) {
     res.render('dashboard', {
         title: 'Campaigns',
         campaigns: campaigns
-    })
-  })
-}
+    }) // .render
+  }) // .exec
+} // .index
 
 /*
  * Render a page where the user can edit account settings
  */
 exports.settings = function(req, res, next) {
   req.render('dashboard/account');
-}
+} // .settings
 
 /*
  * Render the page for making new campaigns.
  */
 exports.make = function(req, res) {
+    console.log("loading page for creating new campaigns");
+    console.log("using default values:");
+    console.log(defaultVals);
     res.render('dashboard/campaign', {
       title: 'Create a new campaign',
       button: 'Create New Campaign',
       campaign: defaultVals
-    });
-}
+    }); // render
+} // make
 
+/*
+ * Render a page that displays details for a campaign,
+ * such as ways to embed the buttons.
+ */
 exports.details = function(req, res) {
+    console.log("rendering campaign details");
     res.render('dashboard/details', {
         campaign: req.campaign,
         info: req.flash('success')
-    })
-}
+    }) // .render
+} // .details
 
 /*
- * Create a list of default values for new campaigns
+ * Create a list of default values for new campaigns.
+ * Default values never change, expect if we change them here.
  */
 var defaultVals = {
     name: '',
@@ -54,10 +63,10 @@ var defaultVals = {
       security: 'We will never post without your permission!',
       paragraph: 'Before accessing this content, the author requests that you post a short message to your social network.',
       heading: 'Post a Message to Receive the Product'
-    },
+    }, // text
     style: {
       fontType: "'Helvetica', sans-serif"
-    }
+    } // style
     
     /*
      * We no longer store data about which campaign the user will use
@@ -65,37 +74,55 @@ var defaultVals = {
         facebook: true,
         twitter: true
     */
-}
+} // defaultVals
 
 /*
- * Fill in default values for empty items in an array of template values.
+ * Fill in values for a template array, using keys from defaults.
  */
 var fillKeys = function (template, data) {
+    
   var defaultKeys = Object.keys(template);
   for (var i = 0; i < defaultKeys.length; i++) {
     if (data[defaultKeys[i]] !== undefined) {
       if (data[defaultKeys[i]] instanceof Object) {
         template[defaultKeys[i]] = fillKeys(template[defaultKeys[i]], data[defaultKeys[i]]);
-      }
+      } // if
       else {
         template[defaultKeys[i]] = data[defaultKeys[i]]
-      }
-    }
-  }
+      } // else
+    } // if
+  } // for
+    console.log("About to return template");
+    console.log("default values are:");
+    console.log(defaultVals);
+    console.log("template values are:");
+    console.log(template);
   return template;
-}
+} // fillKeys (array, array)
 
+/*
+ * Show a page for editing a campaign
+ */
 exports.edit = function(req, res) {
-
-  var template = defaultVals;
-  var data = fillKeys(template, req.campaign);
+    console.log("Editing a campaign");
     
-  res.render('dashboard/campaign', {
+    // Begin by getting an array of the default values
+    // Then, fill our data array by replacing those defaults
+    // with data submitted by the user.
+    console.log("setting template to defaults. Defaults are:");
+    console.log(defaultVals);
+    var template = defaultVals;
+    var data = fillKeys(template, req.campaign);
+    
+    console.log("using campaign's template values:");
+    console.log(data);
+    
+    res.render('dashboard/campaign', {
       title: 'Edit your campaign',
       button: 'Edit Campaign',
       campaign: data
-  })
-}
+    }) // .render
+} // .edit
 
 /*
  * Render a page for showing a single campaign's statistics
@@ -103,8 +130,8 @@ exports.edit = function(req, res) {
 exports.stats = function(req, res) {
     res.render('dashboard/stats', {
         campaign: req.campaign
-    })
-}
+    }) // .render
+} // .stats
 
 /*
  * Delete a campaign
