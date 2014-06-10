@@ -26,6 +26,13 @@
       height:0;
     <% } %>
   }
+    .share-send {
+/*
+        width: 215px;
+        margin: 0 auto;   
+        
+*/
+    }
 </style>
 
 <!-- <%= campaign %> -->
@@ -173,6 +180,7 @@
       <input type="text" class="form-control campaign-create-input" data-section="product" name="campaign-redirect" id="campaign-product" value="<%= campaign.callback %>" placeholder="http://">
     </div> <!-- form-group -->
   </div> <!-- create-section product -->
+<!--
   <div class="campaign-create-section" id="campaign-create-section-networks">
     <h4 class="campaign-create-head">Social Networks</h4>
       <div class="checkbox">
@@ -186,12 +194,13 @@
           </label>
         </div>
 </div>
+-->
       
     </div>
     <div class="col-md-6">
       <div class="campaign-create-preview" id="campaign-create-section-preview">
         <h3 class="campaign-create-head">Preview</h3>
-        <p>Once your users click on the button, they will see the popup previewed below.</p>
+        <p>Once your users click on the button, they will see the popup previewed below. The button at the bottom will depend on whether the user is sharing on Twitter, Facebook, or another social network.</p>
         <hr/>
         <div class="campaign-create-preview-inner">
         <div class="social-modal-container">
@@ -206,22 +215,37 @@
     </div>
     <div style="clear:both"></div>
     <div class="share-send">          
+<!--
       <a href="#" class="facebook-signin">
         <div class="facebook-icon"></div>
         <div class="facebook-signin-text">
             <span class="word-strong">Post</span>
             <span class="word-italic">via</span>
             <span class="word-strong">Facebook</span>  
-        </div> <!-- facebook-signin-text -->
+        </div> 
       </a>
+-->
+<!--
       <a href="#" class="twitter-signin">
           <div class="twitter-icon"></div>
           <div class="twitter-signin-text">
             <span class="word-strong">Post</span>
             <span class="word-italic">via</span>
             <span class="word-strong">Twitter</span>  
-          </div> <!-- twitter-signin-text -->
+          </div>
       </a>
+-->
+        
+    <a href="#" class="googleplus-signin">
+          <div class="googleplus-icon"></div>
+          <div class="googleplus-signin-text">
+            <span class="word-strong">Post</span>
+            <span class="word-italic">via</span>
+            <span class="word-strong">Google+</span>  
+          </div>
+      </a>
+        
+        
     </div> <!-- share-send -->
     <div style="clear:both"></div>
     <div class="post-secure" id="post-security">We'll never post without your permission!</div>

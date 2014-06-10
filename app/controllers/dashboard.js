@@ -45,10 +45,14 @@ var defaultVals = {
     },
     style: {
       fontType: "'Helvetica', sans-serif"
-    },
-    facebook: true,
-    twitter: true
+    }
     
+    /*
+     * We no longer store data about which campaign the user will use
+     * Legacy:
+        facebook: true,
+        twitter: true
+    */
 }
 
 var fillKeys = function (template, data) {
@@ -145,9 +149,13 @@ if (validator.isURL(req.body['campaign-logo'])) {
     camData.style = style;
     camData.message_edit = req.body["campaign-message-edit"] === 'yes' ? true : false;
     camData.link = req.body["campaign-link"];
-    camData.twitter = req.body["campaign-twitter"] === 'yes' ? true : false;
-    camData.facebook = req.body["campaign-facebook"] === 'yes' ? true : false;
     
+    /*
+     * We no longer receive data about which networks the user will use
+     * Legacy:
+        camData.twitter = req.body["campaign-twitter"] === 'yes' ? true : false;
+        camData.facebook = req.body["campaign-facebook"] === 'yes' ? true : false;
+    */
     
   if (req.body['campaign-id'] != undefined) {
         Campaign.findOne({
