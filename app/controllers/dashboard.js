@@ -124,6 +124,12 @@ exports.edit = function(req, res) {
     console.log("using campaign's template values:");
     console.log(data);
     
+    console.log("req.campaign:");
+    console.log(req.campaign);
+    console.log("*Id is:* " + req.campaign['_id']);
+    data['id'] = req.campaign['_id'];
+    console.log(data);
+    
     res.render('dashboard/campaign', {
       title: 'Edit your campaign',
       button: 'Edit Campaign',
@@ -166,20 +172,24 @@ exports.destroy = function(req, res, next) {
  * Save a new campaign to database from POST data.
  */
 exports.create = function(req, res, next) {
-
+    console.log("about to create a new campaign");
     var camData = {};
-    var error
+    var error;
     if (!validator.isNull(req.body['campaign-name'])) {
         camData.name = req.body['campaign-name'];
     } else {
         error = "Please enter a name.";
     } // else
     
+    console.log("Its name is " + camData.name);
+    
     if (!validator.isNull(req.body['campaign-redirect']) && validator.isURL(req.body['campaign-redirect'])) {
         camData.callback = req.body['campaign-redirect'];
     } else {
         error = "Please enter a valid callback URL.";
     } // else
+    
+    console.log("its callback url is: " + camData.callback);
     
     if (!validator.isNull(req.body['campaign-logo'])) {
       camData.logo = req.body['campaign-logo'];
@@ -195,7 +205,10 @@ if (validator.isURL(req.body['campaign-logo'])) {
       camData.logo = '';
     } // else
     
+    console.log("its logo url is: " + camData.logo);
+    
     if (error) { 
+        console.log("There was an error: " + error);
         req.flash('error', error);
         return res.redirect('/dashboard');
     } // if
@@ -223,7 +236,8 @@ if (validator.isURL(req.body['campaign-logo'])) {
         camData.twitter = req.body["campaign-twitter"] === 'yes' ? true : false;
         camData.facebook = req.body["campaign-facebook"] === 'yes' ? true : false;
     */
-    
+
+console.log("*Saving data from:* " + req.body['campaign-id']);
   if (req.body['campaign-id'] != undefined) {
         Campaign.findOne({
         '_id': req.body['campaign-id']
@@ -231,11 +245,11 @@ if (validator.isURL(req.body['campaign-logo'])) {
         if (err) return next(err)
         if (!campaign) return next(err)
         else {
-          var saveData = extend(campaign, camData);
-        }
-    })
+            console.log("no error, saving data");
+            var saveData = extend(campaign, camData);
+        } // else
+    }) // .exec
   } else {
-      
       var saveData = new Campaign(camData);
       saveData.user = req.user;
   } // else
@@ -247,7 +261,7 @@ if (validator.isURL(req.body['campaign-logo'])) {
             res.writeHead(200, {
                 "Content-Type": "text/plain"
       });
-            res.end("error"); // elaborate later.
+    res.end("error"); // elaborate later.
 /*
 req.flash('error', err)
       return res.redirect('/dashboard', {

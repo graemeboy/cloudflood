@@ -61,6 +61,8 @@ exports.postTwitter = function(req, res, next) {
 }
 
 exports.campaign = function(req, res, next, id) {
+    console.log(req);
+    console.log("loading campaign, ID: " + req.id);
     Campaign.findOne({
         '_id': id
     }).exec(function(err, campaign) {
