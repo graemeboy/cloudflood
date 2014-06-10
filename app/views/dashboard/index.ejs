@@ -23,12 +23,15 @@
     {
       margin-left: 2px;
     }
+      .upgrade-button {
+          
+      }
   </style>
   <div id="campaign-list">
     <h1>Your Campaigns</h1>
     
     <div class="container">
-    
+     <div class="col-sm-8">
     <% for(var i=0; i<campaigns.length; i++) {%>
       <div class="dashboard-campaign">
         <h3>
@@ -38,7 +41,20 @@
       </div>
 <% } %>
   </div>
-
+       
+      <div class="col-sm-4">
+        <div id="vip-plan" style="display:none;">
+          <p>You have the VIP plan</p>
+        </div>
+        <div id="free-plan">
+            <p>You are currently on the free plan.</p>
+            <p>We cannot support more than 1,000 visitors per day on the free plan. If you have more traffic than this, please upgrade to the VIP plan!</p>
+            <div id="vip-upgrade">
+                <a class="upgrade-button btn btn-success" href="/upgrade?to=vip">Upgrade to VIP for once-off $27</a>    
+            </div>
+        </div>
+          </div>
+ </div>
       
     
 <!--     <div>You have not created any campaigns yet.</div> -->
@@ -46,7 +62,6 @@
 
 
 
-<!--
     <table class="table">
       <thead>
         <th class="campaigns-head-name">Name</th>
@@ -71,7 +86,6 @@
         </tr>
       </tbody>
     </table>
--->
     
   </div>
   

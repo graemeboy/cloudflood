@@ -21,6 +21,7 @@ module.exports = function (passport) {
 
     router.use('/dashboard', require('./dashboard'));
     router.use('/campaign', require('./campaign'));
+    router.use('/account', require('./account'));
 
     // Make a landing page for beta
 
