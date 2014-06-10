@@ -3,6 +3,9 @@ var mongoose = require('mongoose'),
     validator = require('validator'),
     config = require('../config/config');
 
+/*
+ * Render an overview page / a user dashboard
+ */
 exports.index = function(req, res) {  
   var user = req.user
   Campaign.find({'user': user._id}).exec(function (err, campaigns) {
@@ -14,10 +17,16 @@ exports.index = function(req, res) {
   })
 }
 
+/*
+ * Render a page where the user can edit account settings
+ */
 exports.settings = function(req, res, next) {
   req.render('dashboard/account');
 }
 
+/*
+ * Render the page for making new campaigns.
+ */
 exports.make = function(req, res) {
     res.render('dashboard/campaign', {
       title: 'Create a new campaign',
@@ -33,6 +42,9 @@ exports.details = function(req, res) {
     })
 }
 
+/*
+ * Create a list of default values for new campaigns
+ */
 var defaultVals = {
     name: '',
     message: 'Check out this site!',
@@ -55,6 +67,9 @@ var defaultVals = {
     */
 }
 
+/*
+ * Fill in default values for empty items in an array of template values.
+ */
 var fillKeys = function (template, data) {
   var defaultKeys = Object.keys(template);
   for (var i = 0; i < defaultKeys.length; i++) {
@@ -82,12 +97,18 @@ exports.edit = function(req, res) {
   })
 }
 
+/*
+ * Render a page for showing a single campaign's statistics
+ */
 exports.stats = function(req, res) {
     res.render('dashboard/stats', {
         campaign: req.campaign
     })
 }
 
+/*
+ * Delete a campaign
+ */
 exports.destroy = function(req, res, next) {
     var campaign = req.campaign
     campaign.remove(function(err) {
@@ -97,6 +118,9 @@ exports.destroy = function(req, res, next) {
     })
 }
 
+/*
+ * Save a new campaign to database from POST data.
+ */
 exports.create = function(req, res, next) {
 
     var camData = {};
