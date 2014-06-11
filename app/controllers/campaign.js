@@ -2,7 +2,8 @@ var mongoose = require('mongoose'),
     Campaign = mongoose.model('Campaign'),
     validator = require('validator'),
     config = require('../config/config'),
-    twitterAPI = require('node-twitter-api');
+    twitterAPI = require('node-twitter-api'),
+	facebook = require('fb');
     
 var twitter = new twitterAPI({
   consumerKey: config.twitter.clientID,
@@ -21,6 +22,40 @@ exports.endpoint = function(req, res) {
       callback: req.session.campaign.callback
   })
 
+}
+
+exports.postFacebook = function(req, res, next) {
+	req.session.campaign = req.campaign;
+	
+	facebook.api('oauth/access_token', {
+		client_id: config.facebook.clientID,
+		client_secret: config.facebook.clientSecret,
+		callback: config.facebook.callback,
+		code: 'code'
+	}, function (res) {
+		if(!res || res.error) {
+			console.log(!res ? 'error occurred' : res.error);
+			return;
+		}
+	})
+}
+
+exports.facebookCallback = function (req, res, next) {
+	console.log('got facebook callback!');
+}
+
+exports.postTwitter = function(req, res, next) {
+    req.session.campaign = req.campaign;
+    //req.session.user_message = req.body.message;
+    twitter.getRequestToken(function(error, requestToken, requestTokenSecret, results) {
+        if (error) {
+            console.log("Error getting OAuth request token : " + error);
+        } else {
+          req.session.requestToken = requestToken;
+          req.session.requestTokenSecret = requestTokenSecret;
+          res.redirect('https://twitter.com/oauth/authenticate?oauth_token='+ requestToken);
+        }
+    })
 }
 
 exports.twitterCallback = function (req, res, next) {
@@ -44,20 +79,6 @@ exports.twitterCallback = function (req, res, next) {
       })
     }
   })
-}
-
-exports.postTwitter = function(req, res, next) {
-    req.session.campaign = req.campaign;
-    //req.session.user_message = req.body.message;
-    twitter.getRequestToken(function(error, requestToken, requestTokenSecret, results) {
-        if (error) {
-            console.log("Error getting OAuth request token : " + error);
-        } else {
-          req.session.requestToken = requestToken;
-          req.session.requestTokenSecret = requestTokenSecret;
-          res.redirect('https://twitter.com/oauth/authenticate?oauth_token='+ requestToken);
-        }
-    })
 }
 
 exports.campaign = function(req, res, next, id) {

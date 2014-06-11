@@ -1,7 +1,8 @@
 var mongoose = require('mongoose'),
     Campaign = mongoose.model('Campaign'),
     validator = require('validator'),
-    config = require('../config/config');
+    config = require('../config/config'),
+	extend = require('lodash').extend;
 
 /*
  * Render an overview page / a user dashboard
@@ -168,6 +169,23 @@ exports.destroy = function(req, res, next) {
     })
 } // .destroy
 
+function findUpdates(reqBody, dbEntry) {
+	var result = [];
+	for (key in reqBody) {
+		if (typeof reqBody[key] == 'object' && typeof dbEntry[key] == 'object') {
+			for (field in reqBody[key]) {
+				if (reqBody[key][field] != dbEntry[key][field]) {
+					result.push(key);
+				}
+			}
+		}
+		else if (reqBody[key] != dbEntry[key]) {
+			result.push(key);
+		}
+	}
+	return result;
+}
+
 /*
  * Save a new campaign to database from POST data.
  */
@@ -237,7 +255,7 @@ if (validator.isURL(req.body['campaign-logo'])) {
         camData.facebook = req.body["campaign-facebook"] === 'yes' ? true : false;
     */
 
-console.log("*Saving data from:* " + req.body['campaign-id']);
+	console.log(req.body);
   if (req.body['campaign-id'] != undefined) {
         Campaign.findOne({
         '_id': req.body['campaign-id']
@@ -245,18 +263,24 @@ console.log("*Saving data from:* " + req.body['campaign-id']);
         if (err) return next(err)
         if (!campaign) return next(err)
         else {
-            console.log("no error, saving data");
-            var saveData = extend(campaign, camData);
+			var updates = findUpdates(camData, campaign);
+			console.log(updates);
+			for (var i = 0; i < updates.length; i ++) {
+				var key = updates[i];
+				console.log(key);
+				console.log(campaign[key]);
+				campaign[key] = camData[key];
+			}
+			console.log(campaign);
+			campaign.save();
+			res.redirect('/dashboard/'+campaign._id);
         } // else
     }) // .exec
   } else {
       var saveData = new Campaign(camData);
       saveData.user = req.user;
-  } // else
-  
-  
-  saveData.save(function(err){
-    if (err) {
+	  saveData.save(function(err){
+		      if (err) {
       console.log("error!");
             res.writeHead(200, {
                 "Content-Type": "text/plain"
@@ -283,6 +307,8 @@ console.log("success");
             res.redirect('/dashboard/'+saveData._id);
         } // elsev
     }); // .save
+  } // else
+
 } 
 
 

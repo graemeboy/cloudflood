@@ -3,11 +3,14 @@ var express = require('express')
 
 var router = express.Router();
 
-router.param('campaignId', campaign.campaign);
-
 router.get('/:campaignId', campaign.display);
 router.get('/thankyou', campaign.endpoint);
 router.get('/:campaignId/twitter', campaign.postTwitter);
 router.get('/twitter/callback/', campaign.twitterCallback);  
+router.get('/:campaignId/facebook', campaign.postFacebook);
+router.get('/facebook/callback', campaign.facebookCallback);
+
+
+router.param('campaignId', campaign.campaign);
 
 module.exports = router;
